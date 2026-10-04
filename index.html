@@ -1,41 +1,2547 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>My Webpage</title>
+
+  <!-- Makes the page display properly on phones and tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- EDIT: Change this to your name -->
+  <title>Devashree Rajebahadur | Geospatial Portfolio</title>
+
+  <meta
+    name="description"
+    content="Geospatial portfolio showcasing GIS, remote sensing, cartography and environmental projects."
+  >
+
+  <style>
+
+    /* =========================================================
+       1. DESIGN VARIABLES
+       Change these variables to change the overall theme.
+       ========================================================= */
+
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-soft: #eef5f2;
+      --text: #172033;
+      --muted: #647084;
+      --primary: #1f6f5f;
+      --primary-dark: #155244;
+      --accent: #e5a93d;
+      --border: #dfe6ef;
+      --shadow: 0 12px 35px rgba(23, 32, 51, 0.08);
+      --radius: 18px;
+    }
+
+
+    /* =========================================================
+       DARK MODE VARIABLES
+       These become active when body has class="dark".
+       ========================================================= */
+
+    body.dark {
+      --bg: #0f1722;
+      --surface: #16202d;
+      --surface-soft: #1c2a38;
+      --text: #edf3f8;
+      --muted: #aebbc8;
+      --primary: #67c8af;
+      --primary-dark: #8bd9c3;
+      --accent: #f0bd58;
+      --border: #2d3b4b;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+
+    /* =========================================================
+       2. GLOBAL RESET
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    ul {
+      list-style: none;
+    }
+
+
+    /* =========================================================
+       3. REUSABLE CONTAINER
+       ========================================================= */
+
+    .container {
+      width: min(100% - 44px, 1180px);
+      margin-inline: auto;
+    }
+
+
+    section {
+      padding: 82px 22px;
+    }
+
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+
+    .section-kicker {
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+
+    /* =========================================================
+       4. NAVIGATION BAR
+       ========================================================= */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+
+    .nav-wrap {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+
+    .brand {
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+
+    .brand span {
+      color: var(--primary);
+    }
+
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 650;
+      transition: color 0.2s ease;
+    }
+
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+
+    .theme-toggle,
+    .menu-toggle {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      cursor: pointer;
+      padding: 9px 12px;
+      font-size: 0.9rem;
+    }
+
+
+    .menu-toggle {
+      display: none;
+    }
+
+
+    /* =========================================================
+       5. HERO / LANDING SECTION
+       ========================================================= */
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 90px;
+      padding-bottom: 90px;
+    }
+
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--primary) 14%, transparent);
+      top: -120px;
+      right: -80px;
+      filter: blur(2px);
+    }
+
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      bottom: -120px;
+      left: -90px;
+    }
+
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+
+    .hero-kicker {
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      font-weight: 900;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      max-width: 850px;
+      margin-bottom: 25px;
+    }
+
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 680px;
+      font-size: 1.08rem;
+      margin-bottom: 28px;
+    }
+
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+
+    /* =========================================================
+       6. BUTTONS
+       ========================================================= */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 750;
+      border: 1px solid transparent;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+
+    /* =========================================================
+       7. PROFILE CARD
+       ========================================================= */
+
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .profile-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 22px;
+      background:
+        linear-gradient(
+          135deg,
+          var(--surface-soft),
+          color-mix(in srgb, var(--primary) 18%, var(--surface))
+        );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 4rem;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .profile-card h3 {
+      margin-bottom: 5px;
+    }
+
+
+    .profile-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+
+    .profile-details {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+
+    .profile-detail {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+
+    .profile-detail span:first-child {
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       8. ABOUT SECTION
+       ========================================================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+
+    .about-copy p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 1.02rem;
+    }
+
+
+    .about-copy strong {
+      color: var(--text);
+    }
+
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .fact-card strong {
+      display: block;
+      color: var(--primary);
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 9px;
+    }
+
+
+    .fact-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+
+    /* =========================================================
+       9. SKILLS
+       ========================================================= */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+
+    .skill-card h3 {
+      margin-bottom: 9px;
+    }
+
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 16px;
+    }
+
+
+    .tag {
+      display: inline-block;
+      background: var(--surface-soft);
+      color: var(--primary);
+      border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--border));
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin: 3px 3px 3px 0;
+      font-size: 0.76rem;
+      font-weight: 750;
+    }
+
+
+    /* =========================================================
+       10. PROJECTS
+       ========================================================= */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+
+    .project-thumb {
+      min-height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(
+          135deg,
+          var(--surface-soft),
+          color-mix(in srgb, var(--primary) 16%, var(--surface))
+        );
+      color: var(--primary);
+      font-size: 4rem;
+    }
+
+
+    .project-thumb img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+
+    .card-content {
+      padding: 25px;
+    }
+
+
+    .card-content h3 {
+      margin: 9px 0 10px;
+      font-size: 1.35rem;
+    }
+
+
+    .card-content p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+    }
+
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+
+    .card-link {
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+
+    /* =========================================================
+       11. FEATURED DASHBOARD
+       ========================================================= */
+
+    .dashboard-feature {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 30px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .dashboard-preview {
+      min-height: 420px;
+      border-radius: 18px;
+      background: var(--surface-soft);
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      overflow: hidden;
+    }
+
+
+    .dashboard-preview iframe {
+      width: 100%;
+      min-height: 420px;
+      border: 0;
+      border-radius: 14px;
+    }
+
+
+    .dashboard-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    .dashboard-copy h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin: 12px 0 16px;
+    }
+
+
+    .dashboard-copy p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+
+    .dashboard-copy .btn {
+      align-self: flex-start;
+    }
+
+
+    /* =========================================================
+       12. ACADEMIC WORK
+       ========================================================= */
+
+    .academic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+
+    .academic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .academic-card h3 {
+      margin: 12px 0 9px;
+    }
+
+
+    .academic-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 16px;
+    }
+
+
+    /* =========================================================
+       13. TIMELINE / JOURNEY
+       ========================================================= */
+
+    .timeline {
+      position: relative;
+      max-width: 850px;
+      margin-inline: auto;
+    }
+
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+
+    .timeline-item {
+      position: relative;
+      padding-left: 52px;
+      padding-bottom: 34px;
+    }
+
+
+    .timeline-dot {
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+
+    .timeline-date {
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+
+    .timeline-item h3 {
+      margin-bottom: 5px;
+    }
+
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+
+    /* =========================================================
+       14. CERTIFICATIONS
+       ========================================================= */
+
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+
+    .certificate-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .certificate-card h3 {
+      margin: 10px 0 8px;
+    }
+
+
+    .certificate-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+
+    /* =========================================================
+       15. CONTACT
+       ========================================================= */
+
+    .contact-box {
+      background: var(--primary);
+      color: white;
+      border-radius: 26px;
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 35px;
+      align-items: center;
+    }
+
+
+    .contact-box h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+
+    .contact-box p {
+      max-width: 650px;
+      opacity: 0.9;
+    }
+
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+
+    .contact-links a {
+      background: white;
+      color: var(--primary-dark);
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease;
+    }
+
+
+    .contact-links a:hover {
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       16. FOOTER
+       ========================================================= */
+
+    footer {
+      padding: 35px 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+
+    /* =========================================================
+       17. RESPONSIVE DESIGN
+       ========================================================= */
+
+    @media (max-width: 940px) {
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .academic-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .certifications-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(100% - 30px, 1180px);
+      }
+
+      section {
+        padding: 65px 15px;
+      }
+
+      .nav-wrap {
+        min-height: 65px;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 15px;
+        right: 15px;
+        padding: 15px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links li:last-child {
+        border-bottom: 0;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 15vw, 4.2rem);
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-facts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .academic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .certifications-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        padding: 32px 25px;
+      }
+
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+
+      .quick-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .profile-card {
+        padding: 18px;
+      }
+    }
+
+  </style>
 </head>
+
+
 <body>
-  <h1>Hello!</h1>
-  <p>This is my webpage.</p>
+
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================== -->
 
   <header class="site-header">
-  <div class="container nav-wrap">
-    <a class="brand" href="#home"><span>Devashree's</span> / Portfolio</a>
 
-    <nav aria-label="Main navigation">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <div class="container nav-wrap">
 
-<section class="hero" id="home">
-  <div class="container hero-grid">
-    <div>
-      <div class="hero-kicker">Student • Geospatial Learner</div>
-      <h1>Hi, I’m <span>Devashree.</span></h1>
-      <p>I am a currently pursuing MSc in Geoinformatics. I have a keen interest in learning about the latest technologies in remote sensing and GIS and applying them to real world problems. </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">Explore my work</a>
+      <!-- EDIT: Change initials and portfolio text -->
+      <a class="brand" href="#home">
+        <span>DR</span> / Portfolio
+      </a>
+
+      <div class="nav-right">
+
+        <nav aria-label="Main navigation">
+
+          <ul class="nav-links" id="navLinks">
+
+            <li>
+              <a href="#about">About</a>
+            </li>
+
+            <li>
+              <a href="#skills">Skills</a>
+            </li>
+
+            <li>
+              <a href="#projects">Projects</a>
+            </li>
+
+            <li>
+              <a href="#dashboards">Dashboards</a>
+            </li>
+
+            <li>
+              <a href="#academic">Academic Work</a>
+            </li>
+
+            <li>
+              <a href="#journey">Journey</a>
+            </li>
+
+            <li>
+              <a href="#certifications">Certificates</a>
+            </li>
+
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- Dark mode button -->
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
+          ☾
+        </button>
+
+
+        <!-- Mobile menu button -->
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open navigation menu"
+        >
+          ☰
+        </button>
+
       </div>
-    </div>
-  </div>
-</section>
 
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+
+    <!-- =====================================================
+         HERO / LANDING SECTION
+         ====================================================== -->
+
+    <section class="hero" id="home">
+
+      <div class="container hero-grid">
+
+        <div>
+
+          <div class="hero-kicker">
+            Student • Geospatial Learner
+          </div>
+
+
+          <!-- EDIT: Main name -->
+
+          <h1>
+            Hi, I’m
+            <span>Devashree.</span>
+          </h1>
+
+
+          <!-- EDIT: Your short introduction -->
+
+          <p class="hero-description">
+            I am a geology and geospatial science student exploring
+            GIS, remote sensing and spatial analysis to understand
+            environmental and Earth-system problems.
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a class="btn btn-primary" href="#projects">
+              Explore my work
+            </a>
+
+            <a class="btn btn-secondary" href="#contact">
+              Get in touch
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PROFILE CARD -->
+
+        <aside class="profile-card">
+
+          <!--
+            EDIT:
+            Replace the emoji below with your photograph.
+
+            Example:
+
+            <img
+              src="assets/images/profile.jpg"
+              alt="Portrait of Devashree Rajebahadur"
+            >
+          -->
+
+          <div class="profile-image">
+            🌍
+          </div>
+
+
+          <h3>Geospatial Portfolio</h3>
+
+          <p>
+            GIS • Remote Sensing • Geology • Environmental Applications
+          </p>
+
+
+          <div class="profile-details">
+
+            <div class="profile-detail">
+              <span>Focus</span>
+              <strong>Geospatial Science</strong>
+            </div>
+
+            <div class="profile-detail">
+              <span>Tools</span>
+              <strong>QGIS • ArcGIS Pro</strong>
+            </div>
+
+            <div class="profile-detail">
+              <span>Interests</span>
+              <strong>Earth Observation</strong>
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ABOUT
+         ====================================================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            About
+          </div>
+
+          <h2>
+            From geology to geospatial science.
+          </h2>
+
+          <p>
+            A little about my background, interests and the problems
+            I am interested in solving with spatial data.
+          </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+
+          <div class="about-copy">
+
+            <!-- EDIT: Personal introduction -->
+
+            <p>
+              My interests lie at the intersection of
+              <strong>geology, environmental science and geospatial technology.</strong>
+              I am particularly interested in how GIS and satellite
+              remote sensing can be used to understand changes taking
+              place across landscapes.
+            </p>
+
+
+            <p>
+              Through academic projects, fieldwork and internships,
+              I have worked with spatial data, satellite imagery,
+              digital elevation models, land-cover information and
+              environmental datasets.
+            </p>
+
+
+            <p>
+              I am continuing to develop my skills in
+              <strong>QGIS, ArcGIS Pro, Google Earth Engine,
+              Python and spatial analysis</strong> while building a
+              portfolio of practical geospatial projects.
+            </p>
+
+          </div>
+
+
+
+          <div class="quick-facts">
+
+            <div class="fact-card">
+              <strong>GIS</strong>
+              <span>Spatial analysis & cartography</span>
+            </div>
+
+            <div class="fact-card">
+              <strong>RS</strong>
+              <span>Satellite image analysis</span>
+            </div>
+
+            <div class="fact-card">
+              <strong>DEM</strong>
+              <span>Terrain & watershed analysis</span>
+            </div>
+
+            <div class="fact-card">
+              <strong>Field</strong>
+              <span>Geology & environmental observations</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SKILLS
+         ====================================================== -->
+
+    <section id="skills">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            Skills
+          </div>
+
+          <h2>
+            Tools I use to turn spatial data into information.
+          </h2>
+
+          <p>
+            My current technical skills span GIS, remote sensing,
+            cartography, terrain analysis and beginner-level programming.
+          </p>
+
+        </div>
+
+
+        <div class="skills-grid">
+
+
+          <!-- SKILL CARD 1 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              🗺️
+            </div>
+
+            <h3>
+              GIS & Cartography
+            </h3>
+
+            <p>
+              Spatial data management, map design, digitization,
+              coordinate reference systems and spatial analysis.
+            </p>
+
+            <span class="tag">QGIS</span>
+            <span class="tag">ArcGIS Pro</span>
+            <span class="tag">Cartography</span>
+            <span class="tag">CRS</span>
+
+          </article>
+
+
+
+          <!-- SKILL CARD 2 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              🛰️
+            </div>
+
+            <h3>
+              Remote Sensing
+            </h3>
+
+            <p>
+              Satellite imagery interpretation, spectral indices,
+              image composites and environmental monitoring.
+            </p>
+
+            <span class="tag">Sentinel-2</span>
+            <span class="tag">Landsat</span>
+            <span class="tag">NDVI</span>
+            <span class="tag">NBR</span>
+
+          </article>
+
+
+
+          <!-- SKILL CARD 3 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              ⛰️
+            </div>
+
+            <h3>
+              Terrain & Hydrology
+            </h3>
+
+            <p>
+              DEM processing, elevation mapping, hillshade,
+              watershed delineation and drainage extraction.
+            </p>
+
+            <span class="tag">DEM</span>
+            <span class="tag">Hillshade</span>
+            <span class="tag">Watersheds</span>
+            <span class="tag">Drainage</span>
+
+          </article>
+
+
+
+          <!-- SKILL CARD 4 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              💻
+            </div>
+
+            <h3>
+              Geospatial Programming
+            </h3>
+
+            <p>
+              Developing beginner-level programming skills for
+              data analysis and geospatial workflows.
+            </p>
+
+            <span class="tag">Python</span>
+            <span class="tag">R</span>
+            <span class="tag">ArcPy</span>
+            <span class="tag">GEE</span>
+
+          </article>
+
+
+
+          <!-- SKILL CARD 5 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              🌱
+            </div>
+
+            <h3>
+              Environmental Applications
+            </h3>
+
+            <p>
+              Applying geospatial techniques to vegetation,
+              forest fires, water bodies and ecological questions.
+            </p>
+
+            <span class="tag">Vegetation</span>
+            <span class="tag">Forest Fires</span>
+            <span class="tag">Water Bodies</span>
+            <span class="tag">Ecology</span>
+
+          </article>
+
+
+
+          <!-- SKILL CARD 6 -->
+
+          <article class="skill-card">
+
+            <div class="skill-icon">
+              🪨
+            </div>
+
+            <h3>
+              Geology
+            </h3>
+
+            <p>
+              Geological mapping and interpretation supported by
+              field observations, geomorphology and spatial data.
+            </p>
+
+            <span class="tag">Geology</span>
+            <span class="tag">Geomorphology</span>
+            <span class="tag">Fieldwork</span>
+            <span class="tag">Geological Mapping</span>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROJECTS
+         ====================================================== -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            Projects
+          </div>
+
+          <h2>
+            Selected geospatial work.
+          </h2>
+
+          <p>
+            A selection of projects showing how I apply GIS,
+            remote sensing and spatial analysis to real-world questions.
+          </p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+          <!-- PROJECT 1 -->
+
+          <article class="project-card">
+
+            <div class="project-thumb">
+              🌲
+            </div>
+
+            <div class="card-content">
+
+              <span class="tag">
+                Remote Sensing
+              </span>
+
+              <h3>
+                Temporal Analysis of Forest Fires
+              </h3>
+
+              <p>
+                Analysed temporal changes in forest-fire affected
+                areas in Gadchiroli, Maharashtra using satellite
+                imagery, spectral indices and image composites.
+                The project involved working with NBR-based fire
+                mapping and GIS-based interpretation.
+              </p>
+
+              <div class="card-links">
+
+                <!-- EDIT: Add your actual project/report link -->
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Project
+                </a>
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Report / Map
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PROJECT 2 -->
+
+          <article class="project-card">
+
+            <div class="project-thumb">
+              💧
+            </div>
+
+            <div class="card-content">
+
+              <span class="tag">
+                GIS & Hydrology
+              </span>
+
+              <h3>
+                Watershed & Drainage Analysis
+              </h3>
+
+              <p>
+                Worked with digital elevation models to investigate
+                terrain, drainage networks and watershed boundaries.
+                The workflow included DEM processing, elevation
+                visualization and hydrological analysis.
+              </p>
+
+              <div class="card-links">
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Project
+                </a>
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Map
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PROJECT 3 -->
+
+          <article class="project-card">
+
+            <div class="project-thumb">
+              🌋
+            </div>
+
+            <div class="card-content">
+
+              <span class="tag">
+                Geological GIS
+              </span>
+
+              <h3>
+                Deccan Volcanic Province
+              </h3>
+
+              <p>
+                Developed a geospatial presentation of the Deccan
+                Volcanic Province using terrain data, geological
+                information and cartographic visualization to explore
+                its formation, extent and geoheritage.
+              </p>
+
+              <div class="card-links">
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  StoryMap
+                </a>
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Maps
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- PROJECT 4 -->
+
+          <article class="project-card">
+
+            <div class="project-thumb">
+              🌿
+            </div>
+
+            <div class="card-content">
+
+              <span class="tag">
+                Ecology & Remote Sensing
+              </span>
+
+              <h3>
+                Vegetation & Water Body Monitoring
+              </h3>
+
+              <p>
+                Exploring the use of satellite-derived vegetation
+                indices and field observations to investigate
+                vegetation patterns, invasive species and changes
+                around urban water bodies.
+              </p>
+
+              <div class="card-links">
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Project
+                </a>
+
+                <a
+                  class="card-link"
+                  href="#"
+                >
+                  Maps
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DASHBOARDS / WEB APPLICATIONS
+         ====================================================== -->
+
+    <section id="dashboards">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            Dashboards & Web Applications
+          </div>
+
+          <h2>
+            Interactive geospatial work.
+          </h2>
+
+          <p>
+            Use this space for an ArcGIS dashboard, ArcGIS StoryMap,
+            Google Earth Engine application or another public
+            interactive project.
+          </p>
+
+        </div>
+
+
+        <div class="dashboard-feature">
+
+
+          <div class="dashboard-preview">
+
+            <!--
+              OPTIONAL:
+
+              Once you have a public dashboard that allows embedding,
+              replace this entire div with:
+
+              <iframe
+                src="YOUR-PUBLIC-DASHBOARD-URL"
+                width="100%"
+                height="500"
+                title="My interactive dashboard">
+              </iframe>
+
+              Do not embed private dashboards or anything containing
+              passwords, API keys or confidential information.
+            -->
+
+            <div>
+
+              <strong>
+                Interactive dashboard preview
+              </strong>
+
+              <p style="margin-top: 8px;">
+                Replace this area with your public ArcGIS,
+                StoryMap or web application.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-copy">
+
+            <span class="tag">
+              Featured Work
+            </span>
+
+            <!-- EDIT -->
+
+            <h2>
+              Your Interactive Project
+            </h2>
+
+            <p>
+              Add a short explanation of the problem, dataset,
+              spatial methods and what the visitor can explore
+              in the interactive application.
+            </p>
+
+
+            <!-- EDIT: Replace # with the actual public URL -->
+
+            <a
+              class="btn btn-primary"
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >
+              Open dashboard
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ACADEMIC WORK
+         ====================================================== -->
+
+    <section id="academic">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            Academic Work
+          </div>
+
+          <h2>
+            Coursework, maps and academic outputs.
+          </h2>
+
+          <p>
+            Selected academic work that demonstrates geological,
+            environmental and geospatial knowledge.
+          </p>
+
+        </div>
+
+
+        <div class="academic-grid">
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              Geology
+            </span>
+
+            <h3>
+              Geological Mapping & Fieldwork
+            </h3>
+
+            <p>
+              Field-based geological observations, mapping,
+              geomorphological interpretation and geological
+              documentation.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              Remote Sensing
+            </span>
+
+            <h3>
+              Satellite Image Analysis
+            </h3>
+
+            <p>
+              Academic exercises involving Sentinel-2 imagery,
+              vegetation indices, land-cover interpretation and
+              environmental monitoring.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              GIS
+            </span>
+
+            <h3>
+              Cartography & Spatial Analysis
+            </h3>
+
+            <p>
+              Maps and spatial analysis created using GIS software,
+              including thematic mapping, terrain visualization
+              and spatial data processing.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              Environment
+            </span>
+
+            <h3>
+              Environmental Applications
+            </h3>
+
+            <p>
+              Geospatial approaches to environmental problems,
+              including vegetation, water bodies, ecological
+              monitoring and landscape change.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              Geospatial Analysis
+            </span>
+
+            <h3>
+              DEM & Terrain Analysis
+            </h3>
+
+            <p>
+              Digital elevation model processing, elevation
+              visualization, hillshade generation and
+              watershed-related analysis.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+
+          <article class="academic-card">
+
+            <span class="tag">
+              Research
+            </span>
+
+            <h3>
+              Research & Project Work
+            </h3>
+
+            <p>
+              Selected reports, research exercises and
+              geospatial investigations demonstrating problem
+              formulation and spatial reasoning.
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+            >
+              View work →
+            </a>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         EDUCATION / EXPERIENCE TIMELINE
+         ====================================================== -->
+
+    <section id="journey">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            My Journey
+          </div>
+
+          <h2>
+            Education & experience.
+          </h2>
+
+          <p>
+            A short timeline of my academic and professional
+            development in geology and geospatial science.
+          </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+          <!-- TIMELINE ITEM -->
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              Education
+            </div>
+
+            <h3>
+              B.Sc. / B.Sc. (Honours) Geology
+            </h3>
+
+            <!-- EDIT -->
+
+            <p>
+              Add your college, programme details and expected
+              graduation year here.
+            </p>
+
+          </div>
+
+
+
+          <!-- TIMELINE ITEM -->
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              Geospatial Experience
+            </div>
+
+            <h3>
+              Vasundharaa Geo Technologies
+            </h3>
+
+            <p>
+              Worked on a geospatial project involving temporal
+              analysis of forest fires in Gadchiroli, Maharashtra.
+              Developed experience with satellite imagery,
+              spectral indices, image composites and QGIS workflows.
+            </p>
+
+          </div>
+
+
+
+          <!-- TIMELINE ITEM -->
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              Geospatial Experience
+            </div>
+
+            <h3>
+              ImaGIS Engineering Solutions
+            </h3>
+
+            <p>
+              Worked with satellite imagery for digitization,
+              drainage network extraction and watershed-related
+              geospatial analysis.
+            </p>
+
+          </div>
+
+
+
+          <!-- TIMELINE ITEM -->
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              Present Focus
+            </div>
+
+            <h3>
+              Building a Geospatial Portfolio
+            </h3>
+
+            <p>
+              Developing stronger skills in GIS, remote sensing,
+              Python, R and geospatial analysis while building
+              practical projects for future academic and
+              professional opportunities.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CERTIFICATIONS
+         ====================================================== -->
+
+    <section id="certifications">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-kicker">
+            Certifications
+          </div>
+
+          <h2>
+            Courses and training.
+          </h2>
+
+          <p>
+            Add certificates and training that demonstrate
+            relevant technical or professional skills.
+          </p>
+
+        </div>
+
+
+        <div class="certifications-grid">
+
+
+          <!-- CERTIFICATE 1 -->
+
+          <article class="certificate-card">
+
+            <span class="tag">
+              GIS
+            </span>
+
+            <h3>
+              Certificate / Course Name
+            </h3>
+
+            <p>
+              Issuing organisation • Year
+            </p>
+
+            <!-- EDIT: Add certificate PDF/link -->
+
+            <a
+              class="card-link"
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >
+              View certificate →
+            </a>
+
+          </article>
+
+
+
+          <!-- CERTIFICATE 2 -->
+
+          <article class="certificate-card">
+
+            <span class="tag">
+              Remote Sensing
+            </span>
+
+            <h3>
+              Certificate / Course Name
+            </h3>
+
+            <p>
+              Issuing organisation • Year
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >
+              View certificate →
+            </a>
+
+          </article>
+
+
+
+          <!-- CERTIFICATE 3 -->
+
+          <article class="certificate-card">
+
+            <span class="tag">
+              Geospatial
+            </span>
+
+            <h3>
+              Certificate / Course Name
+            </h3>
+
+            <p>
+              Issuing organisation • Year
+            </p>
+
+            <a
+              class="card-link"
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >
+              View certificate →
+            </a>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTACT
+         ====================================================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-box">
+
+          <div>
+
+            <div class="section-kicker" style="color: white;">
+              Contact
+            </div>
+
+            <h2>
+              Let’s connect.
+            </h2>
+
+            <p>
+              I am interested in geospatial science, remote sensing,
+              GIS, environmental applications and opportunities to
+              learn through practical projects and research.
+            </p>
+
+          </div>
+
+
+          <div class="contact-links">
+
+            <!-- EDIT: Replace these links -->
+
+            <a
+              href="mailto:your-email@example.com"
+            >
+              Email
+            </a>
+
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener"
+            >
+              GitHub
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/yourusername/"
+              target="_blank"
+              rel="noopener"
+            >
+              LinkedIn
+            </a>
+
+            <!-- EDIT: Add your resume once uploaded -->
+
+            <a
+              href="assets/documents/resume.pdf"
+              target="_blank"
+              rel="noopener"
+            >
+              Résumé
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================== -->
+
+  <footer>
+
+    <div class="container footer-wrap">
+
+      <p>
+        © <span id="year"></span> Devashree Rajebahadur.
+        Geospatial E-Portfolio.
+      </p>
+
+      <p>
+        Built with HTML, CSS & a little JavaScript.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       The guide intentionally keeps JavaScript small.
+       It handles:
+       1. Current year
+       2. Mobile menu
+       3. Dark mode
+       4. Remembering dark mode
+       ======================================================== -->
+
+  <script>
+
+
+    /* =====================================================
+       1. AUTOMATIC YEAR
+       ====================================================== */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+
+    /* =====================================================
+       2. MOBILE MENU
+       ====================================================== */
+
+    const menuToggle =
+      document.getElementById("menuToggle");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    menuToggle.addEventListener("click", () => {
+
+      navLinks.classList.toggle("open");
+
+    });
+
+
+    /*
+      Close the mobile menu after clicking a navigation link.
+    */
+
+    navLinks.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("open");
+
+      });
+
+    });
+
+
+
+    /* =====================================================
+       3. DARK MODE
+       ====================================================== */
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+
+    themeToggle.addEventListener("click", () => {
+
+      document.body.classList.toggle("dark");
+
+      const darkMode =
+        document.body.classList.contains("dark");
+
+
+      localStorage.setItem(
+        "portfolio-theme",
+        darkMode ? "dark" : "light"
+      );
+
+
+      themeToggle.textContent =
+        darkMode ? "☀" : "☾";
+
+    });
+
+
+
+    /* =====================================================
+       4. REMEMBER DARK MODE
+       ====================================================== */
+
+    const savedTheme =
+      localStorage.getItem("portfolio-theme");
+
+
+    if (savedTheme === "dark") {
+
+      document.body.classList.add("dark");
+
+      themeToggle.textContent = "☀";
+
+    }
+
+
+  </script>
 
 
 </body>
 </html>
+```
+
