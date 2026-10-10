@@ -1,0 +1,1062 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reflections | My Geospatial ePortfolio</title>
+  <meta name="description" content="Reflections on ecosystem studies, fieldwork, data analysis, GIS and sustainability.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       1. COLOURS AND VARIABLES
+    ========================= */
+
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --soft: #eef5f2;
+      --text: #172033;
+      --muted: #647084;
+      --primary: #1f6f5f;
+      --primary-dark: #155244;
+      --accent: #e5a93d;
+      --border: #dfe6ef;
+      --shadow: 0 8px 28px rgba(23, 32, 51, 0.06);
+    }
+
+    body.dark-mode {
+      --bg: #111827;
+      --surface: #1b2535;
+      --soft: #233b38;
+      --text: #edf2f7;
+      --muted: #a9b5c7;
+      --primary: #6dc4aa;
+      --primary-dark: #9cddc8;
+      --accent: #f2c66d;
+      --border: #344155;
+      --shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    /* =========================
+       2. GENERAL STYLING
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 12px;
+      font-size: clamp(1.65rem, 3vw, 2.15rem);
+      line-height: 1.3;
+      letter-spacing: -0.7px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    /* =========================
+       3. NAVIGATION
+    ========================= */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.4px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .icon-button {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 11px;
+      min-width: 40px;
+    }
+
+    /* =========================
+       4. HERO SECTION
+    ========================= */
+
+    .hero {
+      padding: 78px 0 64px;
+      background:
+        radial-gradient(
+          ellipse at top right,
+          var(--soft),
+          transparent 65%
+        );
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 0.8fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+      max-width: 720px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 25px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .hero-note {
+      background: var(--surface);
+      padding: 26px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-note .note-symbol {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-note h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .hero-note p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-note .note-line {
+      height: 4px;
+      width: 55px;
+      border-radius: 5px;
+      background: var(--accent);
+      margin-top: 20px;
+    }
+
+    /* =========================
+       5. REFLECTION CARDS
+    ========================= */
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .reflection-card {
+      background: var(--surface);
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .reflection-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .card-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .reflection-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .reflection-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 14px;
+    }
+
+    .reflection-card .reflection-tag {
+      margin-top: auto;
+      padding-top: 8px;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* =========================
+       6. FEATURED REFLECTION
+    ========================= */
+
+    .featured-reflection {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .featured-reflection h3 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      margin-bottom: 16px;
+    }
+
+    .featured-reflection p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .featured-visual {
+      min-height: 220px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .featured-visual .visual-icon {
+      font-size: 2.6rem;
+      margin-bottom: 12px;
+    }
+
+    .featured-visual p {
+      font-size: 0.88rem;
+    }
+
+    /* =========================
+       7. LEARNING TAKEAWAYS
+    ========================= */
+
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .takeaway {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .takeaway h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .takeaway p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       8. REFERENCES AND FOOTER
+    ========================= */
+
+    .references-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .references-box p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 8px;
+    }
+
+    .references-box ul {
+      padding-left: 20px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .references-box li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       9. RESPONSIVE DESIGN
+    ========================= */
+
+    @media (max-width: 940px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-note {
+        max-width: 500px;
+      }
+
+      .nav-inner {
+        padding: 14px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .featured-reflection {
+        grid-template-columns: 1fr;
+      }
+
+      .takeaway-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 5px 0;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .reflection-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+
+      .hero {
+        padding: 54px 0 44px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .featured-reflection {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 92%;
+      }
+
+      .takeaway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reflection-card {
+        padding: 22px;
+      }
+
+      .hero-buttons .button {
+        width: 100%;
+      }
+
+      .hero-note {
+        padding: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Respect reduced-motion preferences */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a class="logo" href="index.html">
+        Geospatial ePortfolio
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#academic-work">Academic Work</a>
+        <a href="reflections.html" class="active" aria-current="page">
+          Reflections
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          class="icon-button"
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          title="Toggle dark mode">
+          ◐
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         HERO / INTRODUCTION
+    ========================= -->
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <p class="eyebrow">Ecosystem Studies · Learning Journal</p>
+
+          <h1>
+            Learning to see ecosystems
+            <span>differently.</span>
+          </h1>
+
+          <p class="hero-description">
+            Ecosystem Studies has encouraged me to look beyond individual
+            organisms and physical landscapes and think about the
+            relationships that connect them. This page documents my
+            learning, observations, and reflections throughout the course.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#reflections" class="button button-primary">
+              Explore my reflections →
+            </a>
+
+            <a href="index.html" class="button button-secondary">
+              ← Back to portfolio
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-note">
+          <div class="note-symbol">🌿</div>
+
+          <h3>From concepts to connections</h3>
+
+          <p>
+            Connecting classroom concepts with field observations,
+            ecological data, geospatial tools, and the environments
+            around me.
+          </p>
+
+          <div class="note-line"></div>
+        </aside>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         REFLECTION THEMES
+    ========================= -->
+
+    <section class="section" id="reflections">
+      <div class="container">
+
+        <p class="eyebrow">My learning journey</p>
+
+        <h2 class="section-heading">Reflections on Ecosystem Studies</h2>
+
+        <p class="section-intro">
+          Each reflection explores a different aspect of my learning.
+          The focus is not only on what I studied, but also on what I
+          understood, questioned, observed, and could apply elsewhere.
+        </p>
+
+        <div class="reflection-grid">
+
+          <!-- Reflection 1 -->
+
+          <article class="reflection-card">
+            <span class="card-number">01</span>
+
+            <h3>Understanding Ecosystems as Connected Systems</h3>
+
+            <p>
+              One of the key lessons I am taking away from Ecosystem
+              Studies is that ecosystems cannot be understood by looking
+              at their components in isolation. Organisms, soil, water,
+              climate, and human activities influence one another.
+            </p>
+
+            <p>
+              This perspective has helped me think about environmental
+              changes as interconnected processes rather than isolated
+              events. It also makes me consider how a change in one
+              component can affect the functioning of the wider system.
+            </p>
+
+            <span class="reflection-tag">CONCEPTUAL UNDERSTANDING</span>
+          </article>
+
+
+          <!-- Reflection 2 -->
+
+          <article class="reflection-card">
+            <span class="card-number">02</span>
+
+            <h3>Learning from Field Observations</h3>
+
+            <p>
+              Fieldwork provides an opportunity to connect theoretical
+              concepts with actual environmental conditions. Observing
+              vegetation, habitat characteristics, and human influences
+              can reveal details that may be difficult to appreciate
+              through classroom learning alone.
+            </p>
+
+            <p>
+              My field observations have encouraged me to pay closer
+              attention to the differences between locations and to
+              consider how ecological conditions influence the
+              organisms found there.
+            </p>
+
+            <span class="reflection-tag">FIELDWORK AND OBSERVATION</span>
+          </article>
+
+
+          <!-- Reflection 3 -->
+
+          <article class="reflection-card">
+            <span class="card-number">03</span>
+
+            <h3>Connecting Field Data with Ecological Patterns</h3>
+
+            <p>
+              Collecting ecological data is only the first step.
+              Organising, comparing, and interpreting observations can
+              help identify patterns in species distribution, abundance,
+              and environmental conditions.
+            </p>
+
+            <p>
+              This has helped me appreciate the importance of recording
+              data systematically, recognising limitations in sampling,
+              and distinguishing between an observed pattern and a
+              conclusion that the data can actually support.
+            </p>
+
+            <span class="reflection-tag">ANALYTICAL LEARNING</span>
+          </article>
+
+
+          <!-- Reflection 4 -->
+
+          <article class="reflection-card">
+            <span class="card-number">04</span>
+
+            <h3>Bringing Ecosystem Studies into GIS</h3>
+
+            <p>
+              My interest in GIS and remote sensing gives me another way
+              to approach ecological questions. Satellite imagery and
+              spatial analysis can help examine vegetation, land-use
+              change, and the distribution of environmental features
+              across larger areas.
+            </p>
+
+            <p>
+              Ecosystem Studies provides the ecological context needed
+              to interpret these spatial patterns. A mapped change
+              becomes more meaningful when I can consider the ecological
+              processes that might explain it.
+            </p>
+
+            <span class="reflection-tag">CROSS-DISCIPLINARY LEARNING</span>
+          </article>
+
+
+          <!-- Reflection 5 -->
+
+          <article class="reflection-card">
+            <span class="card-number">05</span>
+
+            <h3>People, Landscapes, and Sustainability</h3>
+
+            <p>
+              Ecosystems are influenced by human decisions as well as
+              natural processes. Urban expansion, land-use change,
+              resource use, and habitat modification can affect
+              ecological relationships and ecosystem functioning.
+            </p>
+
+            <p>
+              Thinking about these interactions has made me more aware
+              of the need to consider environmental consequences when
+              evaluating development and conservation. It also connects
+              ecosystem learning with the broader goals of sustainability.
+            </p>
+
+            <span class="reflection-tag">HUMAN–ENVIRONMENT INTERACTIONS</span>
+          </article>
+
+
+          <!-- Reflection 6 -->
+
+          <article class="reflection-card">
+            <span class="card-number">06</span>
+
+            <h3>Learning Through Collaboration</h3>
+
+            <p>
+              Discussions and collaborative activities can introduce
+              different ways of interpreting the same environmental
+              problem. Working with others can help identify gaps in
+              my understanding and encourage me to explain my reasoning
+              more clearly.
+            </p>
+
+            <p>
+              These experiences also highlight the value of combining
+              different observations and perspectives when studying
+              complex ecological systems.
+            </p>
+
+            <span class="reflection-tag">GROUP WORK AND COMMUNICATION</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         FEATURED REFLECTION
+    ========================= -->
+
+    <section class="section">
+      <div class="container">
+
+        <p class="eyebrow">A closer look</p>
+
+        <div class="featured-reflection">
+
+          <div>
+            <h3>
+              Linking ecological knowledge with real-world questions
+            </h3>
+
+            <p>
+              An important part of my learning is recognising that
+              ecological concepts become more useful when applied to
+              specific environmental questions.
+            </p>
+
+            <p>
+              For example, studying vegetation around a lake involves
+              more than identifying plants. It can also involve
+              considering habitat conditions, species interactions,
+              human disturbance, and changes in the surrounding
+              landscape.
+            </p>
+
+            <p>
+              Combining field observations with spatial data can help
+              build a more complete understanding of these relationships.
+              At the same time, both field sampling and satellite-derived
+              measurements have limitations that need to be considered
+              when drawing conclusions.
+            </p>
+          </div>
+
+          <div class="featured-visual">
+            <div class="visual-icon">🗺️</div>
+
+            <h3>Fieldwork meets spatial analysis</h3>
+
+            <p>
+              Add a photograph from fieldwork, a vegetation map,
+              a satellite image, or a figure from your analysis here.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         KEY TAKEAWAYS
+    ========================= -->
+
+    <section class="section">
+      <div class="container">
+
+        <p class="eyebrow">Looking back</p>
+
+        <h2 class="section-heading">What I am taking forward</h2>
+
+        <p class="section-intro">
+          These are the broader lessons I want to carry into future
+          coursework, research, and environmental projects.
+        </p>
+
+        <div class="takeaway-grid">
+
+          <article class="takeaway">
+            <h3>01 · Think in systems</h3>
+
+            <p>
+              Look for relationships between organisms, environmental
+              conditions, and human activities rather than considering
+              each factor independently.
+            </p>
+          </article>
+
+          <article class="takeaway">
+            <h3>02 · Question the data</h3>
+
+            <p>
+              Consider sampling methods, scale, uncertainty, and
+              limitations before interpreting patterns or making claims.
+            </p>
+          </article>
+
+          <article class="takeaway">
+            <h3>03 · Connect disciplines</h3>
+
+            <p>
+              Use ecological understanding alongside field observations,
+              GIS, remote sensing, and quantitative analysis.
+            </p>
+          </article>
+
+          <article class="takeaway">
+            <h3>04 · Observe critically</h3>
+
+            <p>
+              Pay attention to environmental differences and ask what
+              processes could explain the conditions observed in the field.
+            </p>
+          </article>
+
+          <article class="takeaway">
+            <h3>05 · Communicate clearly</h3>
+
+            <p>
+              Present observations, methods, results, and interpretations
+              in a way that makes their meaning and limitations clear.
+            </p>
+          </article>
+
+          <article class="takeaway">
+            <h3>06 · Consider sustainability</h3>
+
+            <p>
+              Evaluate environmental questions with attention to
+              ecosystem functioning, conservation, and human well-being.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         VISUALS AND REFERENCES
+    ========================= -->
+
+    <section class="section" id="references">
+      <div class="container">
+
+        <p class="eyebrow">Supporting material</p>
+
+        <h2 class="section-heading">Evidence of learning</h2>
+
+        <p class="section-intro">
+          Where relevant, I will support these reflections with
+          field photographs, maps, figures, data visualisations,
+          course activities, and references to the material I used.
+        </p>
+
+        <div class="references-box">
+
+          <h3>Visuals and references</h3>
+
+          <p>
+            Add the details of the work that supports your reflections.
+            For example:
+          </p>
+
+          <ul>
+            <li>Field photographs and notes from ecosystem observations.</li>
+            <li>Tables or graphs from ecological sampling and analysis.</li>
+            <li>GIS maps or remote-sensing outputs related to environmental change.</li>
+            <li>Relevant course readings, research papers, and learning resources.</li>
+          </ul>
+
+          <p>
+            Cite external sources alongside the relevant reflection or
+            figure, and distinguish your own observations from information
+            taken from published research.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+    <div class="container footer-inner">
+
+      <p>© 2026 · Geospatial ePortfolio</p>
+
+      <a href="index.html">Return to main portfolio ↑</a>
+
+    </div>
+  </footer>
+
+
+  <!-- =========================
+       DARK MODE
+  ========================= -->
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+
+    themeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      const isDark = document.body.classList.contains("dark-mode");
+
+      themeToggle.textContent = isDark ? "☀" : "◐";
+
+      themeToggle.setAttribute(
+        "aria-label",
+        isDark ? "Switch to light mode" : "Switch to dark mode"
+      );
+    });
+  </script>
+
+</body>
+</html>
