@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reflections on learning statistics and its applications in environmental science, geology, and geoinformatics.">
+  <title>Statistics Reflections | My E-Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8faf8;
+      --surface: #ffffff;
+      --text: #25352d;
+      --muted: #69786e;
+      --primary: #387653;
+      --primary-light: #e8f2e9;
+      --border: #e0e8e1;
+      --shadow: 0 5px 22px rgba(32, 64, 43, 0.055);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      min-height: 72px;
+      margin: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.05rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-links a.active {
+      font-weight: 700;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+    }
+
+    .icon-button:hover {
+      border-color: var(--primary);
+    }
+
+    /* Main layout */
+
+    .container {
+      width: min(100% - 40px, 960px);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 82px 0 58px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 30px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      max-width: 750px;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      letter-spacing: -0.055em;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero .intro {
+      margin-bottom: 14px;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.65rem;
+      letter-spacing: -0.035em;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .reflection-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 27px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .reflection-card:hover {
+      transform: translateY(-3px);
+      border-color: #b9d2bf;
+    }
+
+    .card-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 17px;
+    }
+
+    .reflection-card h3 {
+      font-size: 1.08rem;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .reflection-card p {
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 4px 9px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Applications section */
+
+    .application-panel {
+      background: var(--primary-light);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 8px;
+    }
+
+    .application-panel h2 {
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .application-panel > p {
+      color: var(--text);
+      margin-bottom: 22px;
+      font-size: 0.94rem;
+    }
+
+    .application-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .application-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .application-item h3 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .application-item p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Closing reflection */
+
+    .closing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 65px;
+      box-shadow: var(--shadow);
+    }
+
+    .closing-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .closing-card p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .closing-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* Dark mode */
+
+    body.dark-mode {
+      --bg: #141c17;
+      --surface: #1c2820;
+      --text: #e7eee8;
+      --muted: #a5b4a8;
+      --primary: #8dcea1;
+      --primary-light: #243c2c;
+      --border: #34443a;
+      --shadow: 0 5px 22px rgba(0, 0, 0, 0.12);
+    }
+
+    body.dark-mode .application-panel > p {
+      color: var(--text);
+    }
+
+    /* Responsive layout */
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        gap: 16px;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .hero {
+        padding: 58px 0 38px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, 960px);
+      }
+
+      .reflection-grid,
+      .application-list {
+        grid-template-columns: 1fr;
+      }
+
+      .reflection-card,
+      .closing-card,
+      .application-panel {
+        padding: 22px;
+      }
+
+      .section-heading h2 {
+        font-size: 1.4rem;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation bar -->
+  <header class="navbar">
+    <div class="nav-inner">
+
+      <a href="index.html" class="logo">My E-Portfolio</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="reflections.html">Ecosystem Studies</a>
+        <a href="statistics-reflections.html" class="active">
+          Statistics
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          class="icon-button"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          title="Toggle dark mode">
+          ☾ Theme
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Introduction -->
+    <section class="hero">
+      <div class="container">
+
+        <span class="eyebrow">Learning Journal · Statistics</span>
+
+        <h1>Making Sense of Data</h1>
+
+        <p class="intro">
+          Statistics provides the tools to turn observations into
+          meaningful evidence. Through this course, I have been exploring
+          how data can be collected, organised, analysed and interpreted
+          to understand patterns in the world around us.
+        </p>
+
+        <p>
+          As a geology student interested in environmental science and
+          geoinformatics, I see statistics as an important link between
+          field observations, spatial datasets and evidence-based
+          conclusions. This page brings together my reflections on the
+          concepts covered in class and their potential applications.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Learning reflections -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>What I Have Learnt</h2>
+          <p>
+            Key concepts from the course and how they contribute to
+            my understanding of data.
+          </p>
+        </div>
+
+        <div class="reflection-grid">
+
+          <article class="reflection-card">
+            <span class="card-number">01</span>
+            <h3>Understanding and Describing Data</h3>
+            <p>
+              Learning about data types, sources and collection methods
+              helped me understand that statistical analysis begins with
+              knowing what the data represents. Measures such as the
+              mean, median, mode, standard deviation and coefficient of
+              variation help summarise datasets and describe their
+              variability. Graphs such as histograms and box plots make
+              distributions easier to interpret.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Mean and median</span>
+              <span class="tag">Standard deviation</span>
+              <span class="tag">Data visualisation</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">02</span>
+            <h3>Probability and Uncertainty</h3>
+            <p>
+              Probability introduced me to the mathematical description
+              of uncertainty. Concepts such as conditional probability,
+              Bayes' theorem, and addition and multiplication rules
+              provide ways to estimate the likelihood of events.
+              This is useful when interpreting observations where
+              outcomes are uncertain and complete information is
+              unavailable.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Probability rules</span>
+              <span class="tag">Conditional probability</span>
+              <span class="tag">Bayes' theorem</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">03</span>
+            <h3>Sampling and Population</h3>
+            <p>
+              Studying sampling methods helped me recognise why collecting
+              information from every member of a population is not always
+              practical. Random, systematic, stratified and cluster
+              sampling offer different ways of selecting representative
+              observations. I also learnt why sampling bias, sampling
+              error and appropriate sample size matter when drawing
+              conclusions from field data.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Sampling design</span>
+              <span class="tag">Sampling error</span>
+              <span class="tag">Population</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">04</span>
+            <h3>Probability Distributions</h3>
+            <p>
+              The study of binomial, Poisson and normal distributions
+              helped me understand that different kinds of data follow
+              different probability patterns. The Central Limit Theorem
+              also explains why sampling distributions are important
+              when making inferences about populations. These ideas
+              provide a foundation for selecting suitable statistical
+              methods.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Binomial distribution</span>
+              <span class="tag">Poisson distribution</span>
+              <span class="tag">Normal distribution</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">05</span>
+            <h3>Estimation and Confidence Intervals</h3>
+            <p>
+              Estimation showed me how sample data can be used to
+              understand a larger population. Point estimates provide
+              single values, while confidence intervals communicate
+              uncertainty around an estimate. Standard errors help
+              describe the variability of sample estimates. These
+              concepts remind me that statistical results should be
+              interpreted with appropriate uncertainty rather than
+              treated as exact values.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Point estimation</span>
+              <span class="tag">Confidence intervals</span>
+              <span class="tag">Standard error</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">06</span>
+            <h3>Hypothesis Testing</h3>
+            <p>
+              Hypothesis testing introduced a systematic approach to
+              evaluating claims using sample data. Formulating null
+              and alternative hypotheses, selecting an appropriate test
+              and interpreting the p-value helps determine whether the
+              observed evidence is inconsistent with the null hypothesis.
+              It also highlights the importance of significance levels,
+              assumptions and the distinction between statistical and
+              practical significance.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Null hypothesis</span>
+              <span class="tag">P-value</span>
+              <span class="tag">Significance level</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">07</span>
+            <h3>Comparing Groups Using Statistical Tests</h3>
+            <p>
+              The chi-square test, t-tests, z-tests and ANOVA demonstrate
+              how statistical methods can answer different research
+              questions. A chi-square test can examine associations
+              between categorical variables, while t-tests and ANOVA
+              can compare group means under appropriate assumptions.
+              Learning to distinguish parametric and non-parametric
+              approaches helps me understand why test selection must
+              depend on the data and research question.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Chi-square</span>
+              <span class="tag">T-tests</span>
+              <span class="tag">ANOVA</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">08</span>
+            <h3>Correlation and Regression</h3>
+            <p>
+              Correlation and simple linear regression introduced me
+              to ways of examining relationships between numerical
+              variables. Pearson's correlation coefficient describes
+              the direction and strength of a linear relationship,
+              whereas regression models the relationship between
+              variables and can support predictions. I also recognise
+              that correlation alone does not establish causation and
+              that model assumptions and residuals need consideration.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Pearson correlation</span>
+              <span class="tag">Linear regression</span>
+              <span class="tag">Prediction</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Applications to geology and geoinformatics -->
+    <section class="section">
+      <div class="container">
+
+        <div class="application-panel">
+
+          <h2>Connecting Statistics with Geology and Geoinformatics</h2>
+
+          <p>
+            One of the most useful aspects of statistics is its
+            applicability beyond numerical exercises. Many geological,
+            ecological and remote sensing investigations depend on
+            identifying patterns, comparing observations and assessing
+            uncertainty.
+          </p>
+
+          <div class="application-list">
+
+            <article class="application-item">
+              <h3>Field Sampling</h3>
+              <p>
+                Sampling design and descriptive statistics can help
+                summarise vegetation surveys, soil samples, rock
+                measurements and other field observations.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Remote Sensing and GIS</h3>
+              <p>
+                Statistical summaries can describe raster values,
+                compare land-cover classes and help investigate
+                relationships between environmental variables.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Environmental Monitoring</h3>
+              <p>
+                Hypothesis tests and confidence intervals can help
+                assess whether observed differences in environmental
+                measurements provide sufficient statistical evidence
+                of a change.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Spatial and Environmental Relationships</h3>
+              <p>
+                Correlation and regression can investigate relationships
+                such as vegetation indices and rainfall, or land
+                surface temperature and built-up area, while recognising
+                the limitations of the model and the data.
+              </p>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Overall reflection -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Overall Reflection</h2>
+          <p>From numerical calculations to evidence-based interpretation.</p>
+        </div>
+
+        <div class="closing-card">
+
+          <h2>Learning to Interpret, Not Just Calculate</h2>
+
+          <p>
+            This course has helped me appreciate that statistics is
+            not limited to performing calculations or applying formulas.
+            It is a way of approaching questions systematically,
+            evaluating evidence and communicating findings clearly.
+            Understanding the assumptions behind a method is just as
+            important as obtaining the numerical result.
+          </p>
+
+          <p>
+            I hope to apply these concepts in future geology and
+            geoinformatics projects, particularly those involving
+            environmental monitoring, field sampling and satellite
+            imagery. Statistical thinking can help me move beyond
+            describing patterns to evaluating how reliable the
+            evidence is and what conclusions can reasonably be drawn.
+          </p>
+
+          <p>
+            As I continue developing my analytical skills, I want to
+            become more confident in choosing suitable tests,
+            interpreting their outputs and presenting data through
+            clear graphs, maps and explanations.
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>My E-Portfolio · Statistics Learning Reflections</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+
+    // Restore the selected theme when the page is reopened.
+    try {
+      if (localStorage.getItem("portfolio-theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    } catch (error) {
+      // The page still works if browser storage is unavailable.
+    }
+
+    function updateThemeButton() {
+      const isDark = document.body.classList.contains("dark-mode");
+      themeToggle.textContent = isDark ? "☀ Light" : "☾ Theme";
+      themeToggle.setAttribute(
+        "aria-label",
+        isDark ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
+
+    themeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      try {
+        localStorage.setItem(
+          "portfolio-theme",
+          document.body.classList.contains("dark-mode")
+            ? "dark"
+            : "light"
+        );
+      } catch (error) {
+        // Theme switching still works without browser storage.
+      }
+
+      updateThemeButton();
+    });
+
+    updateThemeButton();
+  </script>
+
+</body>
+</html>
