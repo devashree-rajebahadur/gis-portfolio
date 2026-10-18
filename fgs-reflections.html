@@ -451,11 +451,24 @@
         padding: 24px;
       }
 
-      .assignment-image,
-      .assignment-image img {
-        min-height: 230px;
-        max-height: 330px;
-      }
+      .assignment-image {
+  min-height: 320px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.assignment-image img {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: 480px;
+  object-fit: contain;
+  object-position: center;
+}
 
       .section-heading h2 {
         font-size: 1.4rem;
@@ -510,7 +523,7 @@
       <div class="container">
 
         <span class="eyebrow">
-          Learning Journal · Geospatial Science
+        Geospatial Science
         </span>
 
         <h1>Understanding the World Through Spatial Thinking</h1>
@@ -773,70 +786,7 @@
 
   </div>
 </section>
-
-
-        </article>
-
-      </div>
-    </section>
-
-    <!-- Real-world applications -->
-    <section class="section">
-      <div class="container">
-
-        <div class="application-panel">
-
-          <h2>Connecting Theory with Practice</h2>
-
-          <p>
-            The concepts covered in this course provide a foundation
-            for using GIS and remote sensing to address practical
-            geographic and environmental questions.
-          </p>
-
-          <div class="application-grid">
-
-            <article class="application-item">
-              <h3>Environmental Monitoring</h3>
-              <p>
-                Spatial datasets can help monitor land-use changes,
-                vegetation patterns, water resources and environmental
-                pressures across a landscape.
-              </p>
-            </article>
-
-            <article class="application-item">
-              <h3>Urban and Regional Planning</h3>
-              <p>
-                Buffering, overlay and network analysis can help assess
-                accessibility, service distribution, site suitability
-                and infrastructure planning.
-              </p>
-            </article>
-
-            <article class="application-item">
-              <h3>Forestry and Wildlife</h3>
-              <p>
-                GIS can support habitat mapping, wildlife corridor
-                identification, forest monitoring and natural resource
-                management.
-              </p>
-            </article>
-
-            <article class="application-item">
-              <h3>Disaster Management</h3>
-              <p>
-                Combining terrain, infrastructure and hazard data can
-                help identify exposed areas and support preparedness
-                and response planning.
-              </p>
-            </article>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
+                      
 
     <!-- Overall reflection -->
     <section class="section">
