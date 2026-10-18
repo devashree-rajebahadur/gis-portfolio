@@ -1,0 +1,937 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Reflections on learning the fundamentals of geospatial science and technology, GIS, cartography, GNSS and spatial analysis.">
+
+  <title>Fundamentals of Geospatial Science & Technolgoy | Reflections</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8faf8;
+      --surface: #ffffff;
+      --text: #25352d;
+      --muted: #69786e;
+      --primary: #387653;
+      --primary-light: #e8f2e9;
+      --border: #e0e8e1;
+      --shadow: 0 5px 22px rgba(32, 64, 43, 0.055);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      min-height: 72px;
+      margin: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.05rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-links a.active {
+      font-weight: 700;
+    }
+
+    .theme-button {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .theme-button:hover {
+      border-color: var(--primary);
+    }
+
+    /* General layout */
+
+    .container {
+      width: min(100% - 40px, 960px);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 82px 0 55px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 30px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.16;
+      letter-spacing: -0.055em;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      max-width: 740px;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.65rem;
+      line-height: 1.4;
+      letter-spacing: -0.035em;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* Learning cards */
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .reflection-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .reflection-card:hover {
+      transform: translateY(-3px);
+      border-color: #b9d2bf;
+    }
+
+    .card-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .reflection-card h3 {
+      font-size: 1.08rem;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .reflection-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 4px 9px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Assignment showcase */
+
+    .assignment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .assignment-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .assignment-image {
+      min-height: 320px;
+      background: var(--primary-light);
+      overflow: hidden;
+    }
+
+    .assignment-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+    }
+
+    .assignment-text {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .assignment-label {
+      display: inline-block;
+      color: var(--primary);
+      background: var(--primary-light);
+      border-radius: 30px;
+      padding: 5px 11px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .assignment-text h3 {
+      font-size: 1.35rem;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    .assignment-text p {
+      color: var(--muted);
+      font-size: 0.91rem;
+      margin-bottom: 13px;
+    }
+
+    .assignment-caption {
+      padding: 13px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* Applications panel */
+
+    .application-panel {
+      background: var(--primary-light);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .application-panel h2 {
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .application-panel > p {
+      color: var(--text);
+      font-size: 0.94rem;
+      margin-bottom: 22px;
+    }
+
+    .application-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .application-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .application-item h3 {
+      color: var(--primary);
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+    }
+
+    .application-item p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Final reflection */
+
+    .closing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 65px;
+      box-shadow: var(--shadow);
+    }
+
+    .closing-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+    }
+
+    .closing-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 13px;
+    }
+
+    .closing-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* Dark mode */
+
+    body.dark-mode {
+      --bg: #141c17;
+      --surface: #1c2820;
+      --text: #e7eee8;
+      --muted: #a5b4a8;
+      --primary: #8dcea1;
+      --primary-light: #243c2c;
+      --border: #34443a;
+      --shadow: 0 5px 22px rgba(0, 0, 0, 0.12);
+    }
+
+    body.dark-mode .application-panel > p {
+      color: var(--text);
+    }
+
+    /* Mobile layout */
+
+    @media (max-width: 850px) {
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        gap: 15px;
+      }
+
+      .theme-button {
+        margin-left: auto;
+      }
+
+      .hero {
+        padding: 58px 0 38px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 28px, 960px);
+      }
+
+      .reflection-grid,
+      .application-grid,
+      .assignment-content {
+        grid-template-columns: 1fr;
+      }
+
+      .reflection-card,
+      .application-panel,
+      .closing-card {
+        padding: 22px;
+      }
+
+      .assignment-text {
+        padding: 24px;
+      }
+
+      .assignment-image,
+      .assignment-image img {
+        min-height: 230px;
+        max-height: 330px;
+      }
+
+      .section-heading h2 {
+        font-size: 1.4rem;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-inner">
+
+      <a href="index.html" class="logo">My E-Portfolio</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="reflections.html">Ecosystem Studies</a>
+        <a href="statistics-reflections.html">Statistics</a>
+        <a href="geospatial-reflections.html" class="active">
+          Geospatial Science
+        </a>
+      </nav>
+
+      <button
+        class="theme-button"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle dark mode">
+        ☾ Theme
+      </button>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Introduction -->
+    <section class="hero">
+      <div class="container">
+
+        <span class="eyebrow">
+          Learning Journal · Geospatial Science
+        </span>
+
+        <h1>Understanding the World Through Spatial Thinking</h1>
+
+        <p>
+          Fundamentals of Geospatial Science and Technology introduced
+          me to the concepts and tools used to understand, represent and
+          analyse geographic information. The course helped me see how
+          maps and spatial data are more than representations of places:
+          they can reveal relationships, patterns and changes across
+          landscapes.
+        </p>
+
+        <p>
+          Through topics ranging from cartography and coordinate systems
+          to GIS databases, GNSS and spatial analysis, I developed a
+          stronger understanding of the processes behind geospatial
+          technologies and their applications in environmental management,
+          natural resource conservation and urban planning.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Course reflections -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>What I Have Learnt</h2>
+          <p>
+            Reflections on the main concepts covered throughout the course.
+          </p>
+        </div>
+
+        <div class="reflection-grid">
+
+          <article class="reflection-card">
+            <span class="card-number">01</span>
+            <h3>Introduction to Geospatial Science</h3>
+            <p>
+              I learnt how geospatial science combines geographic
+              information, technology and spatial thinking to address
+              real-world problems. It helped me understand the importance
+              of location in analysing environmental processes and human
+              activities. I also explored how geospatial technologies
+              contribute to sustainable development and informed
+              decision-making.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Spatial thinking</span>
+              <span class="tag">Geospatial technologies</span>
+              <span class="tag">SDGs</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">02</span>
+            <h3>Geographic Data and Map Design</h3>
+            <p>
+              Learning about geographic data, measurement scales and
+              sampling methods helped me understand how spatial
+              observations are collected and represented. Cartography
+              introduced me to map scale, symbols, colour, typography
+              and visual hierarchy. I realised that an effective map
+              must communicate information accurately while remaining
+              clear and easy to interpret.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Data measurement</span>
+              <span class="tag">Cartography</span>
+              <span class="tag">Map design</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">03</span>
+            <h3>Coordinate Systems and Map Projections</h3>
+            <p>
+              Studying geographic coordinates, geodesy and map projections
+              helped me understand how the Earth's curved surface is
+              represented on a flat map. I learnt that different
+              projections introduce different types of distortion and
+              that choosing an appropriate coordinate reference system
+              is essential for accurate mapping and spatial measurements.
+              These concepts are particularly relevant when combining
+              datasets from different sources in GIS.
+            </p>
+            <div class="tag-row">
+              <span class="tag">CRS</span>
+              <span class="tag">Map projections</span>
+              <span class="tag">Georeferencing</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">04</span>
+            <h3>GIS Data Models and Databases</h3>
+            <p>
+              Exploring vector and raster data models helped me understand
+              how different geographic features are represented digitally.
+              I learnt about spatial relationships, topology, digitisation,
+              metadata, data editing and error correction. The introduction
+              to databases and geodatabases also showed me why organising
+              spatial data properly is important for maintaining
+              consistency and supporting further analysis.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Raster and vector</span>
+              <span class="tag">Topology</span>
+              <span class="tag">Geodatabases</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">05</span>
+            <h3>Global Navigation Satellite Systems</h3>
+            <p>
+              Learning about GNSS introduced me to the principles behind
+              satellite-based positioning. I explored satellite
+              constellations, receiver types, positioning measurements,
+              observation methods and sources of error. This helped me
+              appreciate that accurate location data depends not only
+              on satellite signals but also on measurement conditions,
+              equipment and the methods used to collect observations.
+            </p>
+            <div class="tag-row">
+              <span class="tag">GNSS</span>
+              <span class="tag">Positioning</span>
+              <span class="tag">Measurement errors</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">06</span>
+            <h3>Spatial Analysis and Data Processing</h3>
+            <p>
+              The study of GIS operations introduced me to ways of
+              extracting information from spatial datasets. Measurements,
+              queries, buffering, neighbourhood functions and map overlay
+              demonstrate how geographic features can be analysed in
+              relation to one another. Multicriteria and network analysis
+              further illustrate how GIS can support site selection,
+              accessibility studies and complex spatial decisions.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Buffering</span>
+              <span class="tag">Map overlay</span>
+              <span class="tag">Network analysis</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">07</span>
+            <h3>Applications of Geoinformatics</h3>
+            <p>
+              Exploring applications in forestry, wildlife management,
+              mining, urban planning, disaster management and environmental
+              studies helped me understand the broad relevance of
+              geospatial technologies. GIS can bring together information
+              from different sources to identify vulnerable areas,
+              monitor changes and support planning. This strengthened
+              my interest in applying geospatial methods to environmental
+              and natural resource management.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Environmental GIS</span>
+              <span class="tag">Resource management</span>
+              <span class="tag">Planning</span>
+            </div>
+          </article>
+
+          <article class="reflection-card">
+            <span class="card-number">08</span>
+            <h3>GIS Project Design and Management</h3>
+            <p>
+              Understanding GIS project design helped me recognise
+              the importance of defining a clear research problem
+              before selecting data or analytical methods. Identifying
+              the spatial component of a question, evaluating data
+              sources and planning suitable GIS operations are essential
+              steps towards producing meaningful results. This approach
+              encourages me to think about the purpose and limitations
+              of a project rather than focusing only on the final map.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Problem definition</span>
+              <span class="tag">Data selection</span>
+              <span class="tag">Project planning</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+   
+<!-- Assignment Showcase -->
+<section class="section" id="assignment">
+  <div class="container">
+
+    <div class="section-heading">
+      <h2>Assignment Showcase</h2>
+      <p>
+        Applying geospatial concepts to understand the distribution
+        of healthcare services in an urban neighbourhood.
+      </p>
+    </div>
+
+    <article class="assignment-card">
+
+      <div class="assignment-content">
+
+        <div class="assignment-image">
+          <img
+            src="pics/healthcareLayout.jpg""
+            alt="GIS map showing the spatial distribution of clinics and pharmacies in Erandwane, Pune"
+            loading="lazy">
+        </div>
+
+        <div class="assignment-text">
+
+          <span class="assignment-label">
+            GIS Mapping · Field Data Collection
+          </span>
+
+          <h3>Mapping Healthcare Facilities in Erandwane, Pune</h3>
+
+          <p>
+            This assignment explored the spatial distribution of
+            hospitals, clinics and pharmacies in Erandwane, Pune.
+            I designed an Epicollect5 form to collect the locations
+            and attributes of healthcare facilities, including their
+            names, service types and relevant additional information.
+            I then imported the collected data into ArcGIS to create
+            a map and examine spatial patterns.
+          </p>
+
+          
+          <p>
+            Through this exercise, I learnt the importance of
+            designing a well-structured data collection form,
+            selecting appropriate attributes and collecting
+            reliable geographic data. It also helped me understand
+            how GIS can transform field observations into spatial
+            information that can be interpreted in the context of
+            real-world urban issues.
+          </p>
+
+        </div>
+      </div>
+
+      <p class="assignment-caption">
+        Figure 1. Spatial distribution of hospitals, clinics and
+        pharmacies recorded in Erandwane, Pune, using Epicollect5
+        and mapped in ArcGIS.
+      </p>
+
+    </article>
+
+  </div>
+</section>
+
+
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Real-world applications -->
+    <section class="section">
+      <div class="container">
+
+        <div class="application-panel">
+
+          <h2>Connecting Theory with Practice</h2>
+
+          <p>
+            The concepts covered in this course provide a foundation
+            for using GIS and remote sensing to address practical
+            geographic and environmental questions.
+          </p>
+
+          <div class="application-grid">
+
+            <article class="application-item">
+              <h3>Environmental Monitoring</h3>
+              <p>
+                Spatial datasets can help monitor land-use changes,
+                vegetation patterns, water resources and environmental
+                pressures across a landscape.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Urban and Regional Planning</h3>
+              <p>
+                Buffering, overlay and network analysis can help assess
+                accessibility, service distribution, site suitability
+                and infrastructure planning.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Forestry and Wildlife</h3>
+              <p>
+                GIS can support habitat mapping, wildlife corridor
+                identification, forest monitoring and natural resource
+                management.
+              </p>
+            </article>
+
+            <article class="application-item">
+              <h3>Disaster Management</h3>
+              <p>
+                Combining terrain, infrastructure and hazard data can
+                help identify exposed areas and support preparedness
+                and response planning.
+              </p>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Overall reflection -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Overall Reflection</h2>
+          <p>
+            Developing a spatial perspective on real-world problems.
+          </p>
+        </div>
+
+        <div class="closing-card">
+
+          <h3>From Maps to Meaningful Analysis</h3>
+
+          <p>
+            This course helped me understand that geospatial science
+            involves much more than creating maps. It requires an
+            understanding of how geographic data is collected,
+            structured, referenced, processed and interpreted. Each
+            stage influences the reliability of the final output.
+          </p>
+
+          <p>
+            As a geology student interested in geoinformatics, I see
+            these fundamentals as an important foundation for further
+            work with GIS and remote sensing. Whether studying landscape
+            change, mapping environmental features or analysing spatial
+            relationships, I need to consider data quality, coordinate
+            systems, suitable analytical methods and the way results
+            are communicated.
+          </p>
+
+          <p>
+            Moving forward, I hope to strengthen these skills through
+            practical projects that use geospatial technologies to
+            investigate environmental and resource-management questions.
+            I want to develop the ability to move from a clearly defined
+            problem to a well-supported spatial analysis and an
+            informative final map.
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>My E-Portfolio · Fundamentals of Geospatial Science and Technology</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+
+    // Restore the theme if one was previously selected.
+    try {
+      if (localStorage.getItem("portfolio-theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    } catch (error) {
+      // The page remains usable when browser storage is unavailable.
+    }
+
+    function updateThemeButton() {
+      const dark = document.body.classList.contains("dark-mode");
+
+      themeToggle.textContent = dark ? "☀ Light" : "☾ Theme";
+      themeToggle.setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
+
+    themeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      try {
+        localStorage.setItem(
+          "portfolio-theme",
+          document.body.classList.contains("dark-mode")
+            ? "dark"
+            : "light"
+        );
+      } catch (error) {
+        // Theme switching still works without local storage.
+      }
+
+      updateThemeButton();
+    });
+
+    updateThemeButton();
+  </script>
+
+</body>
+</html>
