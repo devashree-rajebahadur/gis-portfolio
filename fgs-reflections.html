@@ -313,12 +313,32 @@
       margin-bottom: 13px;
     }
 
+    .assignment-caption a {
+    color: #237a57;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.assignment-caption a:hover {
+    color: #145239;
+    text-decoration-thickness: 2px;
+}
+
     .assignment-caption {
-      padding: 13px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
+    grid-column: 1 / -1;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 16px 24px;
+    border-top: 1px solid #d9e2dc;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #64756d;
+}
+
 
     /* Applications panel */
 
@@ -830,11 +850,13 @@ One of the mistakes I made while doing this assignment was that I collected the 
           
           </p>
 
+      
+
+      </div>
       <p class="assignment-caption">
         Figure 2. ArcGIS StoryMap Deccan Volcanic Province: origin and geoheritage
       </p>
-
-      </div>
+      
       </div>
 
     </article>
