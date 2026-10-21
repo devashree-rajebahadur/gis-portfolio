@@ -552,23 +552,215 @@
        10. PROJECTS
        ========================================================= */
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
+    
+       
+/* PROJECT CAROUSEL */
 
+.projects-carousel {
+  position: relative;
+  width: 100%;
+  padding: 12px 0 30px;
+}
 
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease;
-    }
+/* Window that shows the centre card and side previews */
+.projects-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 12px 0;
+}
+
+/* Horizontal row of project cards */
+.projects-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+/* Each card takes most, but not all, of the viewport */
+.projects-grid .project-card {
+  flex: 0 0 76%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0.4;
+  transform: scale(0.94);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    border-color 0.3s ease;
+}
+
+/* Fully visible active card */
+.projects-grid .project-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--primary);
+}
+
+/* Image area */
+.project-thumb {
+  width: 100%;
+  height: 230px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-soft);
+  color: var(--primary);
+  font-size: 4rem;
+}
+
+.project-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Card text */
+.projects-grid .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 25px;
+}
+
+.projects-grid .card-content h3 {
+  margin: 9px 0 10px;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.projects-grid .card-content p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-bottom: 18px;
+}
+
+.projects-grid .card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: auto;
+}
+
+/* Previous and next arrow buttons */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.carousel-arrow:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+/* Position arrows outside the main card */
+.projects-carousel {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+/* Carousel position indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  padding: 0;
+}
+
+.carousel-dot.is-active {
+  background: var(--primary);
+  transform: scale(1.25);
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+  .projects-carousel {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .projects-grid {
+    gap: 14px;
+  }
+
+  .projects-grid .project-card {
+    flex-basis: 88%;
+  }
+
+  .project-thumb {
+    height: 190px;
+  }
+
+  .projects-grid .card-content {
+    padding: 20px;
+  }
+
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+  }
+
+  .carousel-prev {
+    left: -4px;
+  }
+
+  .carousel-next {
+    right: -4px;
+  }
+}
+
 
 
     .project-card:hover {
@@ -1269,7 +1461,7 @@
           <h3>Geospatial Portfolio</h3>
 
           <p>
-            GIS • Remote Sensing • Environmental Applications • Geology 
+          Remote Sensing • GIS • Environmental Applications • Geology 
           </p>
 
 
@@ -1391,9 +1583,9 @@
 
         <div class="section-heading">
 
-          <div class="section-kicker">
+        <!----- <div class="section-kicker">
             Skills
-          </div>
+          </div> -->
 
           <h2>
            Skills
@@ -1575,8 +1767,18 @@
         </div>
 
 
-        <div class="projects-grid">
+        <div class="projects-carousel">
 
+  <button
+    class="carousel-arrow carousel-prev"
+    id="projectPrev"
+    type="button"
+    aria-label="Previous project"
+  >&#8249;</button>
+
+  <div class="projects-viewport" id="projectsViewport">
+
+    <div class="projects-grid" id="projectsTrack">
           <!-- PROJECT 1 -->
 
           <article class="project-card">
@@ -1792,7 +1994,23 @@
 
               </div>
 
-            </div>
+                </div>
+  </div>
+
+  <button
+    class="carousel-arrow carousel-next"
+    id="projectNext"
+    type="button"
+    aria-label="Next project"
+  >&#8250;</button>
+
+  <div
+    class="carousel-dots"
+    id="projectDots"
+    aria-label="Choose a project"
+  ></div>
+
+</div>
 
           </article>
 
@@ -2467,6 +2685,106 @@ navLinks.querySelectorAll("a").forEach(link => {
       themeToggle.textContent = "☀";
 
     }
+
+    
+
+document.addEventListener("DOMContentLoaded", function () {
+  const track = document.getElementById("projectsTrack");
+  const viewport = document.getElementById("projectsViewport");
+  const prev = document.getElementById("projectPrev");
+  const next = document.getElementById("projectNext");
+  const dotsContainer = document.getElementById("projectDots");
+
+  if (!track || !viewport || !prev || !next || !dotsContainer) return;
+
+  const cards = Array.from(track.querySelectorAll(".project-card"));
+  if (!cards.length) return;
+
+  let activeIndex = 0;
+  const dots = [];
+
+  // Create one navigation dot per project
+  cards.forEach((card, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "carousel-dot";
+    dot.setAttribute("aria-label", "Show project " + (index + 1));
+
+    dot.addEventListener("click", () => {
+      activeIndex = index;
+      updateCarousel();
+    });
+
+    dotsContainer.appendChild(dot);
+    dots.push(dot);
+  });
+
+  function updateCarousel() {
+    const activeCard = cards[activeIndex];
+
+    // Centre the active card inside the viewport
+    const offset =
+      activeCard.offsetLeft -
+      (viewport.clientWidth - activeCard.offsetWidth) / 2;
+
+    track.style.transform = `translateX(${-offset}px)`;
+
+    cards.forEach((card, index) => {
+      const isActive = index === activeIndex;
+
+      card.classList.toggle("is-active", isActive);
+      card.setAttribute("aria-current", isActive ? "true" : "false");
+      card.setAttribute("aria-hidden", isActive ? "false" : "true");
+
+      // Keep links and controls in neighbouring previews
+      // out of keyboard navigation until their card is active.
+      card.querySelectorAll("a, button").forEach((element) => {
+        if (isActive) {
+          element.removeAttribute("tabindex");
+        } else {
+          element.setAttribute("tabindex", "-1");
+        }
+      });
+
+      dots[index].classList.toggle("is-active", isActive);
+      dots[index].setAttribute(
+        "aria-pressed",
+        isActive ? "true" : "false"
+      );
+    });
+
+    prev.disabled = false;
+    next.disabled = false;
+  }
+
+  prev.addEventListener("click", () => {
+    activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+    updateCarousel();
+  });
+
+  next.addEventListener("click", () => {
+    activeIndex = (activeIndex + 1) % cards.length;
+    updateCarousel();
+  });
+
+  // Re-centre the card when the browser window is resized
+  window.addEventListener("resize", updateCarousel);
+
+  // Keyboard navigation while using the carousel
+  viewport.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+      updateCarousel();
+    } else if (event.key === "ArrowRight") {
+      activeIndex = (activeIndex + 1) % cards.length;
+      updateCarousel();
+    }
+  });
+
+  updateCarousel();
+});
+</script>
+```
 
 
   </script>
