@@ -548,234 +548,173 @@
     }
 
 
-    /* =========================================================
-       10. PROJECTS
-       ========================================================= */
-
-
-    /* Standardize images across all project cards */
     
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+/* ==========================================
+   10. PROJECTS — STATIC TWO-COLUMN GRID
+   ========================================== */
+
+#projects {
+  width: 100%;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+/* Projects heading and introduction */
+#projects h2 {
+  margin-bottom: 16px;
+}
+
+#projects > .container > p {
+  margin-bottom: 32px;
+}
+
+/* Two cards per row */
+#projects .projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px;
   align-items: stretch;
   width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-
-/* Image container */
-.projects-grid .project-image,
-.projects-grid .project-thumb {
-  width: 100%;
-  height: 230px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--surface-soft);
-}
-
-/* Display the complete image without cropping */
-.projects-grid .project-image img,
-.projects-grid .project-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* Slightly shorter image area on phones */
-@media (max-width: 600px) {
-  .projects-grid .project-image,
-  .projects-grid .project-thumb {
-    height: 200px;
-  }
-}
-
-
-.projects-grid .project-card {
+/* Individual project card */
+#projects .projects-grid .project-card {
   display: flex;
   flex-direction: column;
+  width: 100%;
   min-width: 0;
   height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+
   opacity: 1;
   transform: none;
+
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+
   transition: border-color 0.2s ease;
 }
+
+#projects .projects-grid .project-card:hover {
+  border-color: var(--primary);
+}
+
+/* Project image containers */
+#projects .project-image,
+#projects .project-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 240px;
+  min-height: 0;
+  flex: 0 0 240px;
+
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+
+/* Show the entire image without cropping */
+#projects .project-image img,
+#projects .project-thumb img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  margin: 0;
+  padding: 0;
+}
+
+/* Project card text content */
+#projects .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+}
+
+/* Project category label */
+#projects .tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+/* Project title */
+#projects .card-content h3 {
+  margin: 0 0 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* Project description */
+#projects .card-content p {
+  margin: 0 0 18px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* Project links */
+#projects .card-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+#projects .card-link {
+  display: inline-block;
+  overflow-wrap: anywhere;
+}
+
+/* Tablet and mobile layout */
+@media (max-width: 600px) {
+  #projects {
+    padding: 50px 0;
+  }
+
+  #projects .projects-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px;
+  }
+
+  #projects .project-image,
+  #projects .project-thumb {
+    height: 220px;
+    flex-basis: 220px;
+  }
+
+  #projects .card-content {
+    padding: 20px;
+  }
+}
+
+
+   
 
       
 
 
-/* Image area */
-.project-thumb {
-  width: 100%;
-  height: 230px;
-  flex-shrink: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface-soft);
-  color: var(--primary);
-  font-size: 4rem;
-}
-
-.project-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Card text */
-.projects-grid .card-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 25px;
-}
-
-.projects-grid .card-content h3 {
-  margin: 9px 0 10px;
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-.projects-grid .card-content p {
-  color: var(--muted);
-  font-size: 0.94rem;
-  margin-bottom: 18px;
-}
-
-.projects-grid .card-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: auto;
-}
 
 
+  
 
-/* Smaller screens */
-@media (max-width: 600px) {
-  .projects-carousel {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-}
-  .projects-grid {
-    gap: 14px;
-  }
-
-  .projects-grid .project-card {
-    flex-basis: 88%;
-  }
-
-  .project-thumb {
-    height: 190px;
-  }
-
-  .projects-grid .card-content {
-    padding: 20px;
-  }
-
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-    }
-
-
-    
-/* Consistent project image container */
-.project-thumb {
-  width: 100%;
-  height: 240px;
-  min-height: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  display: block;
-  background: var(--surface-soft);
-  border-radius: 0;
-}
-
-/* Every image fills the container correctly */
-.project-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
-  margin: 0;
-  border-radius: 0;
-}
-
-
-/* Keep text content below the image */
-.projects-grid .card-content {
-  flex: 1;
-  min-width: 0;
-  padding: 25px;
-}
-
-/* Image sizing on mobile */
-@media (max-width: 600px) {
-  .project-thumb {
-    height: 190px;
-  }
-
-  .projects-grid .card-content {
-    padding: 20px;
-  }
-}
-
-
-
-    .card-content {
-      padding: 25px;
-    }
-
-
-    .card-content h3 {
-      margin: 9px 0 10px;
-      font-size: 1.35rem;
-    }
-
-
-    .card-content p {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin-bottom: 18px;
-    }
-
-
-    .card-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-
-    .card-link {
-      color: var(--primary);
-      font-size: 0.88rem;
-      font-weight: 800;
-    }
-
-
-    .card-link:hover {
-      text-decoration: underline;
-    }
 
 
 
