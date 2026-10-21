@@ -1123,6 +1123,36 @@
 }
 
 
+/* Projects heading: left-aligned above the cards */
+#projects .section-heading {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 0 42px 0;
+  text-align: left;
+}
+
+#projects .section-heading h2,
+#projects .section-heading p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Keep the cards in a separate grid below the heading */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  #projects .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
   </style>
 </head>
@@ -1609,7 +1639,7 @@
 
     <section id="projects">
 
-      <div class="projects-grid">
+      <div class="container">
 
         <div class="section-heading">
 
@@ -1627,6 +1657,8 @@
           </p>
 
         </div>
+
+        <div class="projects-grid">
 
 
        
@@ -1841,7 +1873,7 @@
               </article> <!-- End of Project 4 -->
 
     
-
+</div>
 </div>
 </section>
 
