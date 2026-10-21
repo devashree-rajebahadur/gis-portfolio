@@ -554,22 +554,48 @@
 
 
     /* Standardize images across all project cards */
-.projects-grid .project-image {
+    
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
   width: 100%;
-  height: 240px;
-  flex: 0 0 240px;
+}
+
+
+/* Image container */
+.projects-grid .project-image,
+.projects-grid .project-thumb {
+  width: 100%;
+  height: 230px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   background: var(--surface-soft);
 }
 
-.projects-grid .project-image img {
+/* Display the complete image without cropping */
+.projects-grid .project-image img,
+.projects-grid .project-thumb img {
   display: block;
   width: 100%;
   height: 100%;
   max-width: none;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
+
+/* Slightly shorter image area on phones */
+@media (max-width: 600px) {
+  .projects-grid .project-image,
+  .projects-grid .project-thumb {
+    height: 200px;
+  }
+}
+
 
 .projects-grid .project-card {
   display: flex;
@@ -585,6 +611,7 @@
   box-shadow: var(--shadow);
   transition: border-color 0.2s ease;
 }
+
       
 
 
@@ -750,19 +777,7 @@
       text-decoration: underline;
     }
 
-    
-.project-image {
-    height: 237px;
-    overflow: hidden;
-    border-radius: 20px 20px 0 0;
-}
 
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
 
 
 
