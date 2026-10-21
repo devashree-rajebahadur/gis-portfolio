@@ -1669,7 +1669,7 @@
 
     <section id="projects">
 
-      <div class="container">
+      <div class="projects-grid">
 
         <div class="section-heading">
 
@@ -1689,18 +1689,9 @@
         </div>
 
 
-        <div class="projects-carousel">
+       
 
-  <button
-    class="carousel-arrow carousel-prev"
-    id="projectPrev"
-    type="button"
-    aria-label="Previous project"
-  >&#8249;</button>
-
-  <div class="projects-viewport" id="projectsViewport">
-
-    <div class="projects-grid" id="projectsTrack">
+  
       
           <!-- PROJECT 1 -->
 
@@ -1909,21 +1900,10 @@
               </div>
               </article> <!-- End of Project 4 -->
 
-    </div> <!-- End of projectsTrack -->
-  </div> <!-- End of projectsViewport -->
-
-  <button
-    class="carousel-arrow carousel-next"
-    id="projectNext"
-    type="button"
-    aria-label="Next project"
-  >&#8250;</button>
-
-  <div class="carousel-dots" id="projectDots"
-       aria-label="Choose a project"></div>
+    
 
 </div>
-
+</section>
 
           
 
@@ -2594,104 +2574,8 @@ navLinks.querySelectorAll("a").forEach(link => {
       themeToggle.textContent = "☀";
 
     }
+  
 
-    
-
-document.addEventListener("DOMContentLoaded", function () {
-  const track = document.getElementById("projectsTrack");
-  const viewport = document.getElementById("projectsViewport");
-  const prev = document.getElementById("projectPrev");
-  const next = document.getElementById("projectNext");
-  const dotsContainer = document.getElementById("projectDots");
-
-  if (!track || !viewport || !prev || !next || !dotsContainer) return;
-
-  const cards = Array.from(track.querySelectorAll(".project-card"));
-  if (!cards.length) return;
-
-  let activeIndex = 0;
-  const dots = [];
-
-  // Create one navigation dot per project
-  cards.forEach((card, index) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.className = "carousel-dot";
-    dot.setAttribute("aria-label", "Show project " + (index + 1));
-
-    dot.addEventListener("click", () => {
-      activeIndex = index;
-      updateCarousel();
-    });
-
-    dotsContainer.appendChild(dot);
-    dots.push(dot);
-  });
-
-  function updateCarousel() {
-    const activeCard = cards[activeIndex];
-
-    // Centre the active card inside the viewport
-    const offset =
-      activeCard.offsetLeft -
-      (viewport.clientWidth - activeCard.offsetWidth) / 2;
-
-    track.style.transform = `translateX(${-offset}px)`;
-
-    cards.forEach((card, index) => {
-      const isActive = index === activeIndex;
-
-      card.classList.toggle("is-active", isActive);
-      card.setAttribute("aria-current", isActive ? "true" : "false");
-      card.setAttribute("aria-hidden", isActive ? "false" : "true");
-
-      // Keep links and controls in neighbouring previews
-      // out of keyboard navigation until their card is active.
-      card.querySelectorAll("a, button").forEach((element) => {
-        if (isActive) {
-          element.removeAttribute("tabindex");
-        } else {
-          element.setAttribute("tabindex", "-1");
-        }
-      });
-
-      dots[index].classList.toggle("is-active", isActive);
-      dots[index].setAttribute(
-        "aria-pressed",
-        isActive ? "true" : "false"
-      );
-    });
-
-    prev.disabled = false;
-    next.disabled = false;
-  }
-
-  prev.addEventListener("click", () => {
-    activeIndex = (activeIndex - 1 + cards.length) % cards.length;
-    updateCarousel();
-  });
-
-  next.addEventListener("click", () => {
-    activeIndex = (activeIndex + 1) % cards.length;
-    updateCarousel();
-  });
-
-  // Re-centre the card when the browser window is resized
-  window.addEventListener("resize", updateCarousel);
-
-  // Keyboard navigation while using the carousel
-  viewport.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      activeIndex = (activeIndex - 1 + cards.length) % cards.length;
-      updateCarousel();
-    } else if (event.key === "ArrowRight") {
-      activeIndex = (activeIndex + 1) % cards.length;
-      updateCarousel();
-    }
-  });
-
-  updateCarousel();
-});
 
 ```
 </script>
