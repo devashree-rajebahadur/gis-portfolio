@@ -552,31 +552,46 @@
 /* ==========================================
    10. PROJECTS — STATIC TWO-COLUMN GRID
    ========================================== */
-
 #projects {
   width: 100%;
   padding: 80px 0;
   overflow: hidden;
 }
 
-/* Projects heading and introduction */
-#projects h2 {
+/* Left-aligned introduction, like the About section */
+#projects > .container > h2,
+#projects > .container > p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#projects > .container > h2 {
+  max-width: 850px;
   margin-bottom: 16px;
 }
 
 #projects > .container > p {
-  margin-bottom: 32px;
+  max-width: 850px;
+  margin-bottom: 40px;
 }
 
-/* Two cards per row */
+
 #projects .projects-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 28px;
-  align-items: stretch;
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 0;
+  align-items: stretch;
+}
+
+#projects .project-card {
+  width: 100%;
+  min-width: 0;
+  opacity: 1;
+  transform: none;
 }
 
 /* Individual project card */
