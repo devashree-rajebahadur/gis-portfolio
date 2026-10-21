@@ -992,45 +992,68 @@
     }
 
 
+
 /* Reflections dropdown menu */
-.navbar .dropdown {
+.nav-links .dropdown {
     position: relative;
 }
 
-.navbar .dropdown-content {
+.nav-links .dropdown-content {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 240px;
-    max-width: 320px;
-    background: #fff;
-    list-style: none;
+    min-width: 260px;
+    max-width: 340px;
     padding: 8px 0;
     margin: 0;
-    border-radius: 8px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    z-index: 1000;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 1100;
 }
 
-.navbar .dropdown-content li {
-    list-style: none;
+.nav-links .dropdown-content li {
+    border-bottom: none;
 }
 
-.navbar .dropdown-content a {
+.nav-links .dropdown-content a {
     display: block;
     padding: 10px 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
     white-space: normal;
 }
 
-.navbar .dropdown-content a:hover {
-    background-color: #f2f2f2;
+.nav-links .dropdown-content a:hover {
+    color: var(--primary);
+    background: var(--surface-soft);
 }
 
-.navbar .dropdown:hover .dropdown-content,
-.navbar .dropdown:focus-within .dropdown-content {
+.nav-links .dropdown:hover .dropdown-content,
+.nav-links .dropdown:focus-within .dropdown-content,
+.nav-links .dropdown.open .dropdown-content {
     display: block;
 }
+
+/* Keep the dropdown usable in the mobile navigation */
+@media (max-width: 760px) {
+    .nav-links .dropdown-content {
+        position: static;
+        min-width: 0;
+        max-width: none;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0 0 8px 12px;
+    }
+
+    .nav-links .dropdown-content a {
+        padding: 10px 16px;
+    }
+}
+
 
 
   </style>
@@ -2335,15 +2358,28 @@
       Close the mobile menu after clicking a navigation link.
     */
 
-    navLinks.querySelectorAll("a").forEach(link => {
+   
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", (event) => {
+        const dropdown = link.closest(".dropdown");
 
-      link.addEventListener("click", () => {
+        // Toggle the Reflections submenu
+        if (dropdown && link.classList.contains("dropbtn")) {
+            event.preventDefault();
+            dropdown.classList.toggle("open");
+            return;
+        }
 
+        // Close the mobile navigation after selecting a page
         navLinks.classList.remove("open");
 
-      });
-
+        // Reset the dropdown when another link is selected
+        navLinks.querySelectorAll(".dropdown").forEach(item => {
+            item.classList.remove("open");
+        });
     });
+});
+
 
 
 
