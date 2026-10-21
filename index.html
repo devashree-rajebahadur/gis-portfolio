@@ -552,7 +552,24 @@
        10. PROJECTS
        ========================================================= */
 
-    
+
+    /* Standardize images across all project cards */
+.projects-grid .project-image {
+  width: 100%;
+  height: 240px;
+  flex: 0 0 240px;
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+
+.projects-grid .project-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
        
 /* PROJECT CAROUSEL */
 
@@ -1867,13 +1884,6 @@
           </article>
 
 
-        </div>
-
-      </div>
-
-    </section>
-
-
           <!-- PROJECT 2 -->
 
           <article class="project-card">
@@ -1986,8 +1996,6 @@
 
           <article class="project-card">
 
-            <article class="project-card">
-
             <div class="project-image">
     <img
         src="pics\Screenshot 2026-10-04 205542.png"
@@ -2025,10 +2033,10 @@
                 </a> -->
 
               </div>
-              </article>
+              </article> <!-- End of Project 4 -->
 
-                </div>
-  </div>
+    </div> <!-- End of projectsTrack -->
+  </div> <!-- End of projectsViewport -->
 
   <button
     class="carousel-arrow carousel-next"
@@ -2037,17 +2045,10 @@
     aria-label="Next project"
   >&#8250;</button>
 
-  <div
-    class="carousel-dots"
-    id="projectDots"
-    aria-label="Choose a project"
-  >
-  </div>
+  <div class="carousel-dots" id="projectDots"
+       aria-label="Choose a project"></div>
 
-  </div>
-
-  </article>
-
+</div>
 
 
           
@@ -2817,13 +2818,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateCarousel();
 });
-</script>
+
 ```
-
-
-  </script>
-
-
+</script>
 </body>
 </html>
 ```
