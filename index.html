@@ -572,6 +572,7 @@
 /* Horizontal row of project cards */
 .projects-grid {
   display: flex;
+  flex-wrap: nowrap;
   align-items: stretch;
   gap: 24px;
   transition: transform 0.5s ease;
@@ -769,27 +770,57 @@
     }
 
 
-    .project-thumb {
-      min-height: 190px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        linear-gradient(
-          135deg,
-          var(--surface-soft),
-          color-mix(in srgb, var(--primary) 16%, var(--surface))
-        );
-      color: var(--primary);
-      font-size: 4rem;
-    }
+    
+/* Consistent project image container */
+.project-thumb {
+  width: 100%;
+  height: 240px;
+  min-height: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: block;
+  background: var(--surface-soft);
+  border-radius: 0;
+}
 
+/* Every image fills the container correctly */
+.project-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  border-radius: 0;
+}
 
-    .project-thumb img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-    }
+/* Consistent card sizing */
+.projects-grid .project-card {
+  box-sizing: border-box;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: var(--radius);
+}
+
+/* Keep text content below the image */
+.projects-grid .card-content {
+  flex: 1;
+  min-width: 0;
+  padding: 25px;
+}
+
+/* Image sizing on mobile */
+@media (max-width: 600px) {
+  .project-thumb {
+    height: 190px;
+  }
+
+  .projects-grid .card-content {
+    padding: 20px;
+  }
+}
+
 
 
     .card-content {
@@ -1779,6 +1810,7 @@
   <div class="projects-viewport" id="projectsViewport">
 
     <div class="projects-grid" id="projectsTrack">
+      
           <!-- PROJECT 1 -->
 
           <article class="project-card">
@@ -1993,6 +2025,7 @@
                 </a> -->
 
               </div>
+              </article>
 
                 </div>
   </div>
@@ -2008,11 +2041,12 @@
     class="carousel-dots"
     id="projectDots"
     aria-label="Choose a project"
-  ></div>
+  >
+  </div>
 
-</div>
+  </div>
 
-          </article>
+  </article>
 
 
 
