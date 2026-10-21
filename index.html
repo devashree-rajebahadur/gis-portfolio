@@ -991,6 +991,48 @@
       }
     }
 
+
+/* Reflections dropdown menu */
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    max-width: 320px;
+    background: #fff;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+}
+
+.navbar .dropdown-content li {
+    list-style: none;
+}
+
+.navbar .dropdown-content a {
+    display: block;
+    padding: 10px 16px;
+    white-space: normal;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #f2f2f2;
+}
+
+.navbar .dropdown:hover .dropdown-content,
+.navbar .dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+
   </style>
 </head>
 
@@ -1012,7 +1054,7 @@
 
       <div class="nav-right">
 
-        <nav aria-label="Main navigation">
+        <nav aria-label="Main navigation" class="navbar">
 
           <ul class="nav-links" id="navLinks">
 
@@ -1040,13 +1082,23 @@
               <a href="#certifications">Certificates</a>
             </li>
 
-            <li> 
-              <a href="reflections.html">Reflections</a>
-            </li>
+            <li class="dropdown">
+    <a href="#" class="dropbtn">Reflections ▾</a>
 
-            <li> 
+    <ul class="dropdown-content">
+        <li>
             <a href="stats-portfolio.html">Statistics</a>
-            </li>
+        </li>
+        <li>
+            <a href="reflections.html">Ecosystem Studies</a>
+        </li>
+        <li>
+            <a href="fgs-reflections.html">
+                Fundamentals of Geospatial Science and Technology
+            </a>
+        </li>
+    </ul>
+</li>
 
             <li>
               <a href="#contact">Contact</a>
