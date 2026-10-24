@@ -538,16 +538,6 @@
         <a href="about.html">About</a>
         <a href="skills.html">Skills</a>
         <a href="projects.html">Projects</a>
-        <a href="reflections.html">Ecosystem Studies</a>
-        <a href="statistics-reflections.html">Statistics</a>
-        <a href="geospatial-reflections.html" >
-          Geospatial Science
-        </a>
-        <a href="tiirs-reflections.html">
-          Techniques in Image interpretation
-        </a>
-        <a href="pygis-reflections.html" class="active">
-          Programming for Geospatial-I
         </a>
       </nav>
 
@@ -569,15 +559,10 @@
       <div class="container">
 
         <span class="eyebrow">
-        Geospatial Science
+        Python
         </span>
 
-        <h1>TEST</h1>
-
-        <p>
-          [text]
-        </p>
-
+        <h1>Programming for Geospatial-I</h1>
         
       </div>
     </section>
@@ -599,12 +584,11 @@
             <span class="card-number">01</span>
             <h3>Python fundamentals</h3>
             <p>
-              [text]
+          The first thing I learnt in this course was how to set up a code editor. I downloaded Visual Studio Code, cloned the ArcGIS Pro Python environment and set it up in VS Code in order to connect ArcGIS to it. Next, I learnt about data types, variables, functions in python, and how to perform operations on them. 
             </p>
             <div class="tag-row">
-              <span class="tag">Spatial thinking</span>
-              <span class="tag">Geospatial technologies</span>
-              <span class="tag">SDGs</span>
+              <span class="tag">Data types</span>
+              <span class="tag">Variables</span>
             </div>
           </article>
 
@@ -612,12 +596,10 @@
             <span class="card-number">02</span>
             <h3>Describing data</h3>
             <p>
-              [text]
+            In this exercise, I learnt how to describe a large dataset using .arcpy functions in python. Information about the data, such as number of features, etc. can be easily retrieved using a few lines of code, which makes it easy to obtain information about a large amount of data quickly.
             </p>
             <div class="tag-row">
-              <span class="tag">Data measurement</span>
-              <span class="tag">Cartography</span>
-              <span class="tag">Map design</span>
+              <span class="tag">Description</span>
             </div>
           </article>
 
@@ -625,11 +607,10 @@
             <span class="card-number">02</span>
             <h3>Running buffer and clip analysis</h3>
             <p>
-              [text]
+            I created buffers of various distances around features and then clipped the underlying features to the extent of the buffer using arcpy.analysis functions. This was the first analysis operation I performed with python, so naturally it came with a lot of errors in the code, but I learnt how to understand and resolve the errors, and in the end it was very rewarding to see the output. 
             <div class="tag-row">
-              <span class="tag">Data measurement</span>
-              <span class="tag">Cartography</span>
-              <span class="tag">Map design</span>
+              <span class="tag">Buffer</span>
+              <span class="tag">Clip</span>
             </div>
           </article>
 
@@ -637,39 +618,23 @@
             <span class="card-number">03</span>
             <h3>Automating analyses</h3>
             <p>
-              [text]
+            I learnt how to automate the analyses performed in the previous exercise using for loops. So, the lengthy code that I had initially written was now reduced to just the initial workspace set up, variable assignment, and one for loop nested inside another. This is extremely useful for carrying out analysis on a large number of features, instead of writing individual codes for everything. It made me realise how important automation is in geospatial analysis. 
             </p>
             <div class="tag-row">
-              <span class="tag">CRS</span>
-              <span class="tag">Map projections</span>
-              <span class="tag">Georeferencing</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Loops</span>
             </div>
           </article>
-
-          <article class="reflection-card">
-            <span class="card-number">04</span>
-            <h3>Creating geometry using python</h3>
-            <p>
-              [text]
-            </p>
-            <div class="tag-row">
-              <span class="tag">Raster and vector</span>
-              <span class="tag">Topology</span>
-              <span class="tag">Geodatabases</span>
-            </div>
-          </article>
-
 
           <article class="reflection-card">
             <span class="card-number">07</span>
             <h3>Automating map layouts</h3>
             <p>
-             [text]
+            This exercise taught me how to create map layout using programming. This is particularly useful for creating reproducible maps. Once you have a customized and perfected layout, you can just change the input data to get similar maps. 
             </p>
             <div class="tag-row">
-              <span class="tag">Environmental GIS</span>
-              <span class="tag">Resource management</span>
-              <span class="tag">Planning</span>
+              <span class="tag">Layouts</span>
+              
             </div>
           </article>
 
@@ -691,37 +656,32 @@
 
         <div class="assignment-image">
           <img
-            src="pics/healthcareLayout.jpg""
-            alt="GIS map showing the spatial distribution of clinics and pharmacies in Erandwane, Pune"
+            src="pics\pofwLayout.jpg"
             loading="lazy">
         </div>
 
         <div class="assignment-text">
 
           <span class="assignment-label">
-            GIS Mapping · Field Data Collection
+            Buffer · Loops 
           </span>
 
           <h3>Automated buffer analysis</h3>
 
           <p>
-            [text]
+          I automated the process of creating buffers around places of worship in Chennai and clipping other features to its extent usigng for loops. The outer loop created the buffer at three distances, 100, 200, and 500 meters and the inner loop clipped the buildings, roads, railways, and waterbodies layer to the extent of the buffers. 
           </p>
 
           
           <p>
-            [text] </p>
-
-<p>
-[text]
-</p>
+          12 output files were generated by writing a short piece of code, highlighting the important of automation in geospatial analysis. </p
 
 
         </div>
       </div>
 
       <p class="assignment-caption">
-        Figure 1. [text]
+        Figure 1. Map layout of the buffers and clipped features around places of worship in Chennai, Tamil Nadu. 
       </p>
 
     </article>
@@ -793,26 +753,19 @@
 
         <div class="section-heading">
           <h2>Overall Reflection</h2>
-          <p>
-            [text].
-          </p>
+          
         </div>
 
         <div class="closing-card">
 
-          <h3>[text]</h3>
-
+          
           <p>
-            [text]
+           Since I did not have any prior programming experience, this course taught me everything right from the basics of python to conducting geospatial analysis with programming. I learnt to set up a code editor, an ArcGIS Pro python environment, a python interpreter, and then use different ArcPy functions for analysis. The key takeaway from this course for me is automation. I automated buffer analysis, geometry creation, map layout creation; manually doing all of these tasks would be time consuming, but automating them with python is very efficient. 
           </p>
 
           <p>
-            [text]
-          </p>
-
-          <p>
-            [text]
-          </p>
+           I hope to further expand my programming skills and use them for advanced analysis and automation in my future projects. </p>
+         
 
         </div>
 
