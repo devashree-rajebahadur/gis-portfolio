@@ -13,6 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+
+    /* Make the assignment text fill the box */
+
+
     :root {
       --bg: #f8faf8;
       --surface: #ffffff;
@@ -244,19 +248,25 @@
 
     /* Assignment showcase */
 
-    .assignment-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
+/* Make the assignment text fill the box */
+.assignment-card,
+.assignment-card {
+    width: 100%;
+    box-sizing: border-box;
+}
 
-    .assignment-content {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  align-items: stretch;
-  gap: 0;
+/* Justify the paragraph text */
+.assignment-card p,
+.assignment-card p {
+    text-align: justify;
+    width: 100%;
+    max-width: none;
+}
+
+.assignment-card .card-content {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
 }
 
 .assignment-image {
@@ -786,16 +796,16 @@
 
         <div class="section-heading">
           <h2>Overall Reflection</h2>
-          <p>
-            [text]
+          
+            
         </div>
 
         <div class="closing-card">
 
-          <h3>[text]</h3>
+          <!-- <h3>[text]</h3> -->
 
           <p>
-            [text]
+            Overall, this class 
           </p>
 
           <p>
